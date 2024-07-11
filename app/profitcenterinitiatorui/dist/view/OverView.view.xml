@@ -1,0 +1,145 @@
+<mvc:View controllerName="mdg.profitcenter.ui.profitcenterinitiatorui.controller.OverView"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:layout="sap.ui.layout"
+    xmlns:vm="sap.ui.comp.variants">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" backgroundDesign="List">
+        <f:title>
+            <f:DynamicPageTitle id="_IDOverviewDynamicPageTitle1" backgroundDesign="Transparent">
+                <f:heading>
+                    <Title id="_IDOverviewTitle1" text="Master Data - Create Requests"/>
+                </f:heading>
+                <f:actions>
+                    <ToolbarSpacer id="_IDOverviewToolbarSpacer1" />
+                    <MenuButton id="_IDOverviewMenuButton1" text="{i18n>create}" buttonMode="Split" useDefaultActionOnly="true" type="Emphasized">
+                        <menu>
+                            <Menu id="_IDOverviewMenu1" itemSelected="onMenuAction">
+                                <MenuItem key="A" id="mCR" text="{i18n>asset}" icon="sap-icon://bar-code"/>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                    <MenuButton id="_IDOverviewMenuButton2" text="{i18n>dispChange}" buttonMode="Split" useDefaultActionOnly="true" type="Emphasized">
+                        <menu>
+                            <Menu id="_IDOverviewMenu2" itemSelected="onMenuActionDisplay">
+                                <MenuItem key="A" id="dCR" text="{i18n>asset}" icon="sap-icon://bar-code"/>
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="_IDOverviewDynamicPageHeader1" pinnable="true" backgroundDesign="Transparent">
+                <f:content>
+                    <fb:FilterBar id="filterbar" reset="onClear" clear="onClear" search="onGo" showFilterConfiguration="false" useToolbar="false" showGoOnFB="true" showClearOnFB="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem1" groupName="g1" name="A" label="Request Number" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput name="Request Status" id="REQ" valueHelpRequest="REQHelp"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem2" groupName="g1" name="B" label="Status" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Select xmlns="sap.m" id="rStat" forceSelection="false">
+                                        <items>
+                                            <core:Item id="_IDOverviewItem1"
+                                                xmlns:core="sap.ui.core" key="A" text="In Approval"/>
+                                            <core:Item id="_IDOverviewItem2"
+                                                xmlns:core="sap.ui.core" key="C" text="Completed"/>
+                                            <core:Item id="_IDOverviewItem3"
+                                                xmlns:core="sap.ui.core" key="R" text="Rejected"/>
+                                        </items>
+                                    </Select>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="fgType" groupName="g1" name="objType" label="Type" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Select xmlns="sap.m" id="objType" forceSelection="false">
+                                        <items>
+                                            <core:Item id="createItem"
+                                                xmlns:core="sap.ui.core" key="Create" text="Create"/>
+                                            <core:Item id="modItem"
+                                                xmlns:core="sap.ui.core" key="Change" text="Change"/>
+                                        </items>
+                                    </Select>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem3" groupName="g1" name="D" label="Creation Date" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker displayFormat="dd-MM-yyyy" id="crDate"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table noDataText="No data to display" id="table" alternateRowColors="true" includeItemInSelection="true" mode="SingleSelectLeft" updateStarted="upstarted" items="{/ETY_WORKFLOW_HEADERSet}" sticky="HeaderToolbar,ColumnHeaders" growing="true" growingThreshold="50" selectionChange="overviewTableSelectionChange">
+                <headerToolbar>
+                    <OverflowToolbar id="_IDOverviewOverflowToolbar">
+                        <ToolbarSpacer id="_IDOverviewToolbarSpacer"/>
+                        <Button id="_IDOverviewViewButton" text="View" press="onPressViewData" enabled="false"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="_IDOverviewColumn1" width="6em">
+                        <header>
+                            <Label id="_IDOverviewLabel1" text="Request Number" />
+                        </header>
+                    </Column>
+                    <Column id="_IDOverviewColumn2" demandPopin="true" minScreenWidth="Desktop" width="6em">
+                        <header>
+                            <Label id="_IDOverviewLabel2" text="Status" />
+                        </header>
+                    </Column>
+
+                    <Column id="_IDOverviewColumn3" width="5em" demandPopin="true" minScreenWidth="Desktop">
+                        <header>
+                            <Text id="_IDOverviewText1" text="Type" />
+                        </header>
+                    </Column>
+                    <Column id="_IDOverviewColumn4" width="5em" demandPopin="true" minScreenWidth="Desktop">
+                        <header>
+                            <Text id="_IDOverviewText2" text="Tab Combination" />
+                        </header>
+                    </Column>
+                    <Column id="_IDOverviewColumn5" demandPopin="true" minScreenWidth="Desktop" width="6em">
+                        <header>
+                            <Text id="text18_1617707769875" text="Object"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDOverviewColumn6" demandPopin="true" minScreenWidth="Desktop" width="5em">
+                        <header>
+                            <Text id="_IDOverviewText3" text="Created On"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDOverviewColumn7" width="8em">
+                        <header>
+                            <Text text="Created By" id="text20"/>
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDOverviewColumnListItem1" type="Active" highlight="{ path: 'Status', formatter:'.formatter.getColor' }">
+                        <cells>
+                            <ObjectIdentifier id="_IDOverviewObjectIdentifier1" title="{ReqId}" titleActive="{ path: 'Status', formatter:'.formatter.checkStatus' }" titlePress="showStatus" />
+                            <ObjectStatus id="_IDOverviewObjectStatus1" text="{ path: 'Status', formatter:'.formatter.reqStatus' }" state="{ path: 'Status', formatter:'.formatter.getColor' }" />
+                            <Text id="_IDOverviewText4" text="{ path: 'Type'}"/>
+                            <Text id="_IDOverviewText5" text="{ path: 'TabCombination'}"/>
+                            <Text id="_IDOverviewText6" text="{ path: 'Object'}"/>
+                            <Text id="_IDOverviewText7" text="{ path: 'createdAt' , formatter:'.formatter.extDate' }"/>
+                            <Text id="_IDOverviewText8" text="{ path: 'createdBy'}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

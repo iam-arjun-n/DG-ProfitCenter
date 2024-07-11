@@ -24,6 +24,19 @@
           "odataVersion": "2.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "profitcenter": {
+          "title": "{{appTitle}}",
+          "semanticObject": "ProfitCenter",
+          "action": "create",
+          "signature": {
+            "additionalParameters": "allowed",
+            "parameters": {}
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -99,18 +112,17 @@
         {
           "name": "RouteOverView",
           "pattern": "",
-          "target": [
-            "TargetOverView"
-          ]
+          "target": ["TargetOverView"]
         },
         {
           "name": "CreateRoute",
           "pattern": "create/{key}",
           "target": ["TargetCreateRoute"]
-        },{
-          "name" : "ViewRoute",
+        },
+        {
+          "name": "ViewRoute",
           "pattern": "view/{ReqId}",
-          "target":["TargetViewRoute"]
+          "target": ["TargetViewRoute"]
         }
       ],
       "targets": {
@@ -128,7 +140,7 @@
           "viewId": "CreatePage",
           "viewName": "CreatePage"
         },
-        "TargetViewRoute":{
+        "TargetViewRoute": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,

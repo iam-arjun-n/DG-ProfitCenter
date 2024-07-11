@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/Device","mdg/profitcenter/ui/profitcenterinitiatorui/model/models"],function(e,i,t){"use strict";return e.extend("mdg.profitcenter.ui.profitcenterinitiatorui.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);this.getRouter().initialize();this.setModel(t.createDeviceModel(),"device")}})});
+//# sourceMappingURL=Component.js.map

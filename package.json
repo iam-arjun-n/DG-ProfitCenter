@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "deploy": "cf deploy mta_archives/MDGProfitCenter_1.0.0.mtar --retries 1",
     "watch-profitcenterinitiatorui": "cds watch --open profitcenterinitiatorui/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy MDGProfitCenter --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive"
