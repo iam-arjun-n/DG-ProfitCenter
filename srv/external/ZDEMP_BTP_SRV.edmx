@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="CodeList"/>
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZDEMP_BTP_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="ETY_WORKFLOW_HEADER" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                </Key>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Requisition Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="242" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Object" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Object" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PendingWith" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastModifiedOn" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Current Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastModifiedBy" Type="Edm.String" Nullable="false" MaxLength="242" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="NAV_WORKFLOW_COMMENTSET" Relationship="ZDEMP_BTP_SRV.ATN_WORKFLOW_COMMENT" FromRole="FromRole_ATN_WORKFLOW_COMMENT" ToRole="ToRole_ATN_WORKFLOW_COMMENT"/>
+                <NavigationProperty Name="NAV_WORKFLOW_ITEMSET" Relationship="ZDEMP_BTP_SRV.ATN_WORKFLOW_HEADER_ITEM" FromRole="FromRole_ATN_WORKFLOW_HEADER_ITEM" ToRole="ToRole_ATN_WORKFLOW_HEADER_ITEM"/>
+            </EntityType>
+            <EntityType Name="ETY_WORKFLOW_ITEM" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                    <PropertyRef Name="CustomerId"/>
+                </Key>
+                <Property Name="Bpext" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="External Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BuGroup" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Grouping" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inco3L" Type="Edm.String" Nullable="false" MaxLength="70" sap:unicode="false" sap:label="Inco. Location2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Requisition ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="CustomerID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Partner" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Role1" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="BP Role" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Partner Cat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Role2" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="BP Role" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Title" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameOrg1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameOrg2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameOrg3" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameOrg4" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BuSort1" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Search Term 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BuSort2" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Search Term 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Street" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HouseNum1" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="House Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StrSuppl1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Street 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StrSuppl2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Street 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StrSuppl3" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Street 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Location" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Street 5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostCode1" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="District" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Langu" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Transpzone" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Transport Zone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Timezone" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Timezone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TelNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MobNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SmtpAddr1" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SmtpAddr2" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Telfx" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TaxType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Category" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxnum" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Tax Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxkd01" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tax Classific." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxkd02" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tax Classific." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxkd03" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tax Classific." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxkd04" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tax Classific." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxkd05" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tax Classific." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Taxkd06" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Tax Classific." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vwerk" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Deliver.Plant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kvgr1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Customer Grp 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kvgr2" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Customer Grp 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kvgr3" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Customer Grp 3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kvgr4" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Customer Grp 4" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kvgr5" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Customer Grp 5" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Podkz" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="POD-relevant" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kkber" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Cred.Contr.Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ktgrd" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="AccAssmtGrpCust" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inco1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Incoterms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Inco2" Type="Edm.String" Nullable="false" MaxLength="28" sap:unicode="false" sap:label="Incoterms 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PayTerm" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Payt terms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Incov" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Inco. Version" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prfre" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Price determin." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bokre" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Rebate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Uebto" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:unicode="false" sap:label="Overdeliv. Tol." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Untto" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:unicode="false" sap:label="Underdel. Tol." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vsbed" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Shp.Cond." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kzazu" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Order Combinat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lprio" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Delivery Prior." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Agrel" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Settlem. Mgmt." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Versg" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Cust.Stats.Grp" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pltyp" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Price List Tp." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kalks" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Cust.Pric.Proc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Konda" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="CustPrice Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kurst" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Exch. Rate Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Klabc" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="ABC class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Awahr" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Order Probab." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Eikto" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Acct at cust." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Begru" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="AuthorizGroup" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkgrp" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Sales group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkbur" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sales office" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kdgrp" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Customer Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bzirk" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Sales District" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Spart" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vtweg" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Distr. Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zterm" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Payt terms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Banks" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Bank Ctry/Reg." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bankl" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Bank Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Banka" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Bank Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bankn" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Bank Account" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Altkn" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Prev.Acct No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Xzver" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Rec.Payt Hist." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zahls" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Payment Block" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Hbkid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="House Bank" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zwels" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Payment Methods" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fdgrv" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Planning Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zuawa" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Sort key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Akont" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Recon. account" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbund" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Trading Partner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bahne" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Express station" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Konzs" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Koinh" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="konih" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1iexcd" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IEXCD" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1iexrn" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IEXRN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1iexrg" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IEXRG" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1iexdi" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IEXDI" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1iexco" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IEXCO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1iexcicu" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IEXCICU" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1icstno" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1ICSTNO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1ilstno" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1ILSTNO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1isern" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1ISERN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1ipanno" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IPANNO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="J1ipanref" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="J1IPANREF" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GstTds" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="GSTTDS" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="NAV_WORKFLOW_MESSAGE" Relationship="ZDEMP_BTP_SRV.ATN_WORKFLOW_MESSAGE" FromRole="FromRole_ATN_WORKFLOW_MESSAGE" ToRole="ToRole_ATN_WORKFLOW_MESSAGE"/>
+            </EntityType>
+            <EntityType Name="ETY_WORKFLOW_COMMENT" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Commentsno"/>
+                    <PropertyRef Name="ReqId"/>
+                </Key>
+                <Property Name="Commentsno" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="COMMENTSNO" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Requsition Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Comments" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="comments" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="242" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ETY_WORKFLOW_MESSAGE" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                    <PropertyRef Name="CustomerId"/>
+                </Key>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Requisition ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Customer Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Messageserialno" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="message serial" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message Text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="I_BankType" sap:label="Bank" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BankCountry"/>
+                    <PropertyRef Name="BankInternalID"/>
+                </Key>
+                <Property Name="BankCountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Bank Country/Region" sap:quickinfo="Country/Region Key of Bank"/>
+                <Property Name="BankInternalID" Type="Edm.String" Nullable="false" MaxLength="15" sap:display-format="UpperCase" sap:text="BankName" sap:label="Bank Key" sap:quickinfo="Bank Keys"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created on" sap:quickinfo="Date on which the record was created"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created by" sap:quickinfo="Name of person who created the object"/>
+                <Property Name="BankName" Type="Edm.String" MaxLength="60" sap:label="Bank Name" sap:quickinfo="Name of Financial Institution"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="StreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="ShortStreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="ShortCityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="SWIFTCode" Type="Edm.String" MaxLength="11" sap:display-format="UpperCase" sap:label="SWIFT/BIC" sap:quickinfo="SWIFT/BIC for International Payments"/>
+                <Property Name="BankGroup" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Bank group" sap:quickinfo="Bank group (bank network)"/>
+                <Property Name="BankNetworkGrouping" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Bank group" sap:quickinfo="Bank group (bank network)"/>
+                <Property Name="IsPostBankAccount" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Post.bank curr.acct" sap:quickinfo="Post Office Bank Current Account"/>
+                <Property Name="IsMarkedForDeletion" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Deletion Indicator"/>
+                <Property Name="Bank" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Bank Number"/>
+                <Property Name="PostOfficeBankAccount" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Post bank acct no." sap:quickinfo="Post office bank current account number"/>
+                <Property Name="Branch" Type="Edm.String" MaxLength="40" sap:label="Bank Branch"/>
+                <Property Name="BankBranch" Type="Edm.String" MaxLength="40" sap:label="Bank Branch"/>
+                <Property Name="CheckDigitCalculationMethod" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Method" sap:quickinfo="Check digit calculation method"/>
+                <Property Name="BankDataFileFormat" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="File Format" sap:quickinfo="Format of File with Bank Data"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+            </EntityType>
+            <EntityType Name="I_Bank_2Type" sap:label="Bank" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BankCountry"/>
+                    <PropertyRef Name="BankInternalID"/>
+                </Key>
+                <Property Name="BankCountry" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Bank Country/Region" sap:quickinfo="Country/Region Key of Bank"/>
+                <Property Name="BankInternalID" Type="Edm.String" Nullable="false" MaxLength="15" sap:display-format="UpperCase" sap:label="Bank Key" sap:quickinfo="Bank Keys"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created on" sap:quickinfo="Date on which the record was created"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created by" sap:quickinfo="Name of person who created the object"/>
+                <Property Name="BankName" Type="Edm.String" MaxLength="60" sap:label="Bank Name" sap:quickinfo="Name of Financial Institution"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="StreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="ShortStreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="ShortCityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="SWIFTCode" Type="Edm.String" MaxLength="11" sap:display-format="UpperCase" sap:label="SWIFT/BIC" sap:quickinfo="SWIFT/BIC for International Payments"/>
+                <Property Name="BankNetworkGrouping" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Bank group" sap:quickinfo="Bank group (bank network)"/>
+                <Property Name="IsPostBankAccount" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Post.bank curr.acct" sap:quickinfo="Post Office Bank Current Account"/>
+                <Property Name="IsMarkedForDeletion" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Deletion Indicator"/>
+                <Property Name="Bank" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Bank Number"/>
+                <Property Name="PostOfficeBankAccount" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Post bank acct no." sap:quickinfo="Post office bank current account number"/>
+                <Property Name="Branch" Type="Edm.String" MaxLength="40" sap:label="Bank Branch"/>
+                <Property Name="BankBranch" Type="Edm.String" MaxLength="40" sap:label="Bank Branch"/>
+                <Property Name="CheckDigitCalculationMethod" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Method" sap:quickinfo="Check digit calculation method"/>
+                <Property Name="BankDataFileFormat" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="File Format" sap:quickinfo="Format of File with Bank Data"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="BankCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Internal bank" sap:quickinfo="Internal bank category"/>
+            </EntityType>
+            <EntityType Name="I_BusinessPartnerGroupingTextType" sap:label="Business Partner Grouping - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                    <PropertyRef Name="BusinessPartnerGrouping"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="BusinessPartnerGrouping" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Grouping" sap:quickinfo="Business Partner Grouping"/>
+                <Property Name="BusinessPartnerGroupingText" Type="Edm.String" MaxLength="40" sap:label="Grouping Description" sap:quickinfo="Description"/>
+            </EntityType>
+            <EntityType Name="I_BusinessPartnerRoleTextType" sap:label="Business Partner Role- Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BusinessPartnerRole"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="BusinessPartnerRole" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="UpperCase" sap:label="BP Role"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="BusinessPartnerRoleShortName" Type="Edm.String" MaxLength="25" sap:label="Role Description" sap:quickinfo="BP Role Title"/>
+            </EntityType>
+            <EntityType Name="I_BusPartCategoryTextType" sap:label="Business Partner Category - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BusinessPartnerCategory"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="BusinessPartnerCategory" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="BP Category" sap:quickinfo="Business Partner Category"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Lang." sap:quickinfo="Language Key"/>
+                <Property Name="BusinessPartnerCategoryText" Type="Edm.String" MaxLength="60" sap:label="Business Partner Category Description" sap:quickinfo="Short Text for Fixed Values"/>
+            </EntityType>
+            <EntityType Name="I_CompanyCodeType" sap:label="Company Code" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                </Key>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CompanyCodeName" sap:label="Company Code"/>
+                <Property Name="CompanyCodeName" Type="Edm.String" MaxLength="25" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="25" sap:label="City"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="ChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Chart of Accounts"/>
+                <Property Name="FiscalYearVariant" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Fiscal Year Variant"/>
+                <Property Name="Company" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Company"/>
+                <Property Name="CreditControlArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="CreditControlArea_Text" sap:label="Credit control area" sap:value-list="standard"/>
+                <Property Name="CreditControlArea_Text" Type="Edm.String" MaxLength="35" sap:label="Description" sap:quickinfo="Description of the credit control area" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CountryChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Alternative COA" sap:quickinfo="Alternative Chart of Accounts"/>
+                <Property Name="FinancialManagementArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="FM Area" sap:quickinfo="Financial Management Area"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address"/>
+                <Property Name="TaxableEntity" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Taxes on Sls/Purc." sap:quickinfo="Taxes on Sales/Purchases Group"/>
+                <Property Name="VATRegistration" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="VAT Registration No." sap:quickinfo="VAT Registration Number"/>
+                <Property Name="ExtendedWhldgTaxIsActive" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Extended WTax Active" sap:quickinfo="Indicator: Extended Withholding Tax Active"/>
+                <Property Name="ControllingArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="ControllingArea_Text" sap:label="Controlling Area" sap:value-list="standard"/>
+                <Property Name="ControllingArea_Text" Type="Edm.String" MaxLength="25" sap:label="Controlling Area Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FieldStatusVariant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Field status variant" sap:quickinfo="Field Status Variant"/>
+                <Property Name="NonTaxableTransactionTaxCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Output Tax Code" sap:quickinfo="Output Tax Code for Non-Taxable Transactions"/>
+                <Property Name="DocDateIsUsedForTaxDetn" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Tax Determ.with Doc.Date" sap:quickinfo="Indicator: Document Date As the Basis for Tax Determination"/>
+                <Property Name="TaxRptgDateIsActive" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Tax Date" sap:quickinfo="Tax Reporting Date Active in Documents"/>
+                <Property Name="CashDiscountBaseAmtIsNetAmt" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Net Discount Base" sap:quickinfo="Indicator: Discount base amount is the net value"/>
+            </EntityType>
+            <EntityType Name="I_ControllingAreaStdVHType" sap:label="Controlling Area" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ControllingArea"/>
+                </Key>
+                <Property Name="ControllingArea" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="ControllingAreaName" sap:label="Controlling Area"/>
+                <Property Name="ControllingAreaName" Type="Edm.String" MaxLength="25" sap:label="Controlling Area Name"/>
+            </EntityType>
+            <EntityType Name="I_CountryTextType" sap:label="Country/Region Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Country"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="CountryName" Type="Edm.String" MaxLength="50" sap:label="Country/Region Name"/>
+                <Property Name="NationalityName" Type="Edm.String" MaxLength="15" sap:label="Nationality"/>
+                <Property Name="NationalityLongName" Type="Edm.String" MaxLength="50" sap:label="Nationality (Long)" sap:quickinfo="Nationality (Max. 50 Characters)"/>
+                <Property Name="CountryShortName" Type="Edm.String" MaxLength="15" sap:label="Country/Region Name" sap:quickinfo="Name of Country/Region (Short)"/>
+            </EntityType>
+            <EntityType Name="I_CreditControlAreaStdVHType" sap:label="Credit Control Area" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CreditControlArea"/>
+                </Key>
+                <Property Name="CreditControlArea" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CreditControlArea_Text" sap:label="Credit Control Area"/>
+                <Property Name="CreditControlArea_Text" Type="Edm.String" MaxLength="35" sap:label="Description" sap:quickinfo="Description of the credit control area" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="I_CurrencyTextType" sap:label="Currency Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                    <PropertyRef Name="Currency"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="CurrencyName" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+                <Property Name="CurrencyShortName" Type="Edm.String" MaxLength="15" sap:label="Short text"/>
+            </EntityType>
+            <EntityType Name="I_CustomerAccountAssgmtGroupTType" sap:label="Account Assignment Group of Customer - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustomerAccountAssignmentGroup"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="CustomerAccountAssignmentGroup" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Acct Assmt Grp Cust." sap:quickinfo="Account Assignment Group for this Customer"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="CustomerAccountAssgmtGrpName" Type="Edm.String" MaxLength="20" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="I_CustomerGroupTextType" sap:label="Customer Group - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustomerGroup"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="CustomerGroup" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Customer Group"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="CustomerGroupName" Type="Edm.String" MaxLength="20" sap:label="Name"/>
+            </EntityType>
+            <EntityType Name="I_CustomerPaymentTermsTextType" sap:label="Customer Payment Terms - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustomerPaymentTerms"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="CustomerPaymentTerms" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment terms" sap:quickinfo="Terms of payment key"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="CustomerPaymentTermsName" Type="Edm.String" MaxLength="30" sap:label="Description" sap:quickinfo="Description of terms of payment"/>
+            </EntityType>
+            <EntityType Name="I_Customer_VHType" sap:label="Customer" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Customer"/>
+                </Key>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="CustomerName" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="OrganizationBPName1" Type="Edm.String" MaxLength="35" sap:label="Name 1"/>
+                <Property Name="OrganizationBPName2" Type="Edm.String" MaxLength="35" sap:label="Name 2"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region" sap:quickinfo="Country/Region Key"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="StreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Postal Code"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:label="Customer Name" sap:quickinfo="Name of Customer"/>
+                <Property Name="CustomerAccountGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Account group" sap:quickinfo="Customer Account Group"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Complete Flag" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="IsCompetitor" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Competitors" sap:quickinfo="Indicator: Competitor"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Partner Type"/>
+            </EntityType>
+            <EntityType Name="I_DistributionChannelTextType" sap:label="Distribution Channel - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DistributionChannel"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Distribution Channel"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="DistributionChannelName" Type="Edm.String" MaxLength="20" sap:label="Distribution Channel Description"/>
+            </EntityType>
+            <EntityType Name="I_DivisionTextType" sap:label="Division - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Division"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Division"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="DivisionName" Type="Edm.String" MaxLength="20" sap:label="Division Description"/>
+            </EntityType>
+            <EntityType Name="I_IncotermsClassificationTextType" sap:label="Incoterms Classification - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IncotermsClassification"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="IncotermsClassification" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Incoterms" sap:quickinfo="Incoterms (Part 1)"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="IncotermsClassificationName" Type="Edm.String" MaxLength="30" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="I_PaymentTermsTextType" sap:label="Payment Term Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PaymentTerms"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="PaymentTerms" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment Terms" sap:quickinfo="Terms of Payment Key"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="PaymentTermsName" Type="Edm.String" MaxLength="30" sap:label="Description" sap:quickinfo="Description of terms of payment"/>
+            </EntityType>
+            <EntityType Name="I_PlantType" sap:label="Plant" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+                <Property Name="ValuationArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation area"/>
+                <Property Name="PlantCustomer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer No Plant" sap:quickinfo="Customer Number of Plant" sap:value-list="standard"/>
+                <Property Name="PlantSupplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sppl. No. Plnt" sap:quickinfo="Supplier Number of Plant" sap:value-list="standard"/>
+                <Property Name="FactoryCalendar" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Factory Calendar" sap:quickinfo="Factory calendar key"/>
+                <Property Name="DefaultPurchasingOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. organization" sap:quickinfo="Purchasing organization"/>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Organization" sap:quickinfo="Sales Organization for Intercompany Billing"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address"/>
+                <Property Name="PlantCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Plant cat." sap:quickinfo="Plant category"/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Distrib.channel" sap:quickinfo="Distribution channel for intercompany billing"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Int.co billing div." sap:quickinfo="Division for intercompany billing"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="IsMarkedForArchiving" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Archiving flag" sap:quickinfo="Central archiving marker for master record"/>
+            </EntityType>
+            <EntityType Name="I_RegionTextType" sap:label="Region Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Country"/>
+                    <PropertyRef Name="Region"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="RegionName" Type="Edm.String" MaxLength="20" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="I_SalesGroupTextType" sap:label="Sales Group - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesGroup"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="SalesGroup" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Sales group"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="SalesGroupName" Type="Edm.String" MaxLength="20" sap:label="Sales Group Description"/>
+            </EntityType>
+            <EntityType Name="I_SalesOfficeTextType" sap:label="Sales Office - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesOffice"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="SalesOffice" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales office"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="SalesOfficeName" Type="Edm.String" MaxLength="20" sap:label="Sales Office Description"/>
+            </EntityType>
+            <EntityType Name="I_SalesOrganizationTextType" sap:label="Sales Organization - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesOrganization"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Organization"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="SalesOrganizationName" Type="Edm.String" MaxLength="20" sap:label="Sales Organization Description"/>
+            </EntityType>
+            <EntityType Name="I_ShippingConditionTextType" sap:label="Shipping Condition - Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ShippingCondition"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="ShippingCondition" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Shipping Conditions"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="ShippingConditionName" Type="Edm.String" MaxLength="20" sap:label="Description" sap:quickinfo="Shipping Conditions Description"/>
+            </EntityType>
+            <EntityType Name="I_Supplier_VHType" sap:label="Supplier" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Supplier"/>
+                </Key>
+                <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="SupplierName" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="SupplierName" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Supplier Name"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="SupplierAccountGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Account group" sap:quickinfo="Vendor account group"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Completed" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Partner Type"/>
+            </EntityType>
+            <EntityType Name="P_PlantAddrDetails_FsType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+                <Property Name="ValuationArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation area"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address"/>
+                <Property Name="OriginCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="SupplierRegion" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+            </EntityType>
+            <EntityType Name="ZC_WORKFLOWHEADERType" sap:label="Workflow Header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                </Key>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="242"/>
+                <Property Name="CreatedOn" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Current Date" sap:quickinfo="System Date"/>
+                <Property Name="Object" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Type" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PendingWith" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="User Name"/>
+                <Property Name="LastModifiedOn" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Current Date" sap:quickinfo="System Date"/>
+                <Property Name="LastModifiedBy" Type="Edm.String" MaxLength="242"/>
+            </EntityType>
+            <EntityType Name="ZC_WORKFLOWITEMType" sap:label="Workflow Item table" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                    <PropertyRef Name="CustomerId"/>
+                </Key>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Role1" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="BP Role"/>
+                <Property Name="Role2" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="BP Role"/>
+                <Property Name="Bpext" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="External BP Number" sap:quickinfo="Business Partner Number in External System"/>
+                <Property Name="Partner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="Type" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="BP Category" sap:quickinfo="Business Partner Category"/>
+                <Property Name="BuGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Grouping" sap:quickinfo="Business Partner Grouping"/>
+                <Property Name="Title" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Title" sap:quickinfo="Form-of-Address Key"/>
+                <Property Name="NameOrg1" Type="Edm.String" MaxLength="40" sap:label="Name 1" sap:quickinfo="Name 1 of organization"/>
+                <Property Name="NameOrg2" Type="Edm.String" MaxLength="40" sap:label="Name 2" sap:quickinfo="Name 2 of organization"/>
+                <Property Name="NameOrg3" Type="Edm.String" MaxLength="40" sap:label="Name 3" sap:quickinfo="Name 3 of organization"/>
+                <Property Name="NameOrg4" Type="Edm.String" MaxLength="40" sap:label="Name 4" sap:quickinfo="Name 4 of organization"/>
+                <Property Name="BuSort1" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Search Term 1"/>
+                <Property Name="BuSort2" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Search Term 2"/>
+                <Property Name="Street" Type="Edm.String" MaxLength="60" sap:label="Street"/>
+                <Property Name="HouseNum1" Type="Edm.String" MaxLength="10" sap:label="House Number"/>
+                <Property Name="StrSuppl1" Type="Edm.String" MaxLength="40" sap:label="Street 2"/>
+                <Property Name="StrSuppl2" Type="Edm.String" MaxLength="40" sap:label="Street 3"/>
+                <Property Name="StrSuppl3" Type="Edm.String" MaxLength="40" sap:label="Street 4"/>
+                <Property Name="Location" Type="Edm.String" MaxLength="40" sap:label="Street 5"/>
+                <Property Name="City1" Type="Edm.String" MaxLength="40" sap:label="City"/>
+                <Property Name="PostCode1" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Postal Code" sap:quickinfo="City postal code"/>
+                <Property Name="City2" Type="Edm.String" MaxLength="40" sap:label="District"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="Langu" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Region" sap:quickinfo="Region (State, Province, County)"/>
+                <Property Name="Transpzone" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Transportation Zone" sap:quickinfo="Transportation zone to or from which the goods are delivered"/>
+                <Property Name="Time" Type="Edm.String" MaxLength="20"/>
+                <Property Name="TelNumber" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Telephone" sap:quickinfo="First telephone no.: dialling code+number"/>
+                <Property Name="MobNumber" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Telephone" sap:quickinfo="First telephone no.: dialling code+number"/>
+                <Property Name="SmtpAddr1" Type="Edm.String" MaxLength="241" sap:label="E-Mail Address"/>
+                <Property Name="SmtpAddr2" Type="Edm.String" MaxLength="241" sap:label="E-Mail Address"/>
+                <Property Name="Telfx" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Fax" sap:quickinfo="First Fax No.: Area Code + Number"/>
+                <Property Name="TaxType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Tax Number Category"/>
+                <Property Name="Taxnum" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Tax number" sap:quickinfo="Business Partner Tax Number"/>
+                <Property Name="Taxkd01" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Classification" sap:quickinfo="Tax classification for customer"/>
+                <Property Name="Taxkd02" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Classification" sap:quickinfo="Tax classification for customer"/>
+                <Property Name="Taxkd03" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Classification" sap:quickinfo="Tax classification for customer"/>
+                <Property Name="Taxkd04" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Classification" sap:quickinfo="Tax classification for customer"/>
+                <Property Name="Taxkd05" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Classification" sap:quickinfo="Tax classification for customer"/>
+                <Property Name="Taxkd06" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tax Classification" sap:quickinfo="Tax classification for customer"/>
+                <Property Name="Vwerk" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Delivering Plant" sap:quickinfo="Delivering Plant (Own or External)"/>
+                <Property Name="Kvgr1" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Customer Group 1"/>
+                <Property Name="Kvgr2" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Customer Group 2"/>
+                <Property Name="Kvgr3" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Customer Group 3"/>
+                <Property Name="Kvgr4" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Customer Group 4"/>
+                <Property Name="Kvgr5" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Customer Group 5"/>
+                <Property Name="Podkz" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Relevant for POD" sap:quickinfo="Relevant for POD processing"/>
+                <Property Name="Kkber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Credit control area"/>
+                <Property Name="Ktgrd" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Acct Assmt Grp Cust." sap:quickinfo="Account Assignment Group for this Customer"/>
+                <Property Name="Inco1" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Incoterms" sap:quickinfo="Incoterms (Part 1)"/>
+                <Property Name="Inco2" Type="Edm.String" MaxLength="28" sap:label="Incoterms (Part 2)"/>
+                <Property Name="Inco3L" Type="Edm.String" MaxLength="70" sap:label="Incoterms Location 2"/>
+                <Property Name="PayTerm" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment terms" sap:quickinfo="Terms of payment key"/>
+                <Property Name="Incov" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Incoterms Version"/>
+                <Property Name="Prfre" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Price determination" sap:quickinfo="Relevant for price determination ID"/>
+                <Property Name="Bokre" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Rebate" sap:quickinfo="Indicator: Customer Is Rebate-Relevant"/>
+                <Property Name="Uebto" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Overdeliv. Tolerance" sap:quickinfo="Overdelivery Tolerance"/>
+                <Property Name="Untto" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Underdel. Tolerance" sap:quickinfo="Underdelivery Tolerance"/>
+                <Property Name="Vsbed" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Shipping Conditions"/>
+                <Property Name="Kzazu" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Order Combination" sap:quickinfo="Order Combination Indicator"/>
+                <Property Name="Lprio" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Delivery Priority"/>
+                <Property Name="Agrel" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Settlement Mgmt." sap:quickinfo="Indicator: Relevant for Settlement Management"/>
+                <Property Name="Versg" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Customer Stats.Group" sap:quickinfo="Customer Statistics Group"/>
+                <Property Name="Pltyp" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Price List Type"/>
+                <Property Name="Kalks" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Cust.Pric.Procedure" sap:quickinfo="Customer Classification for Pricing Procedure Determination"/>
+                <Property Name="Konda" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Customer Price Group"/>
+                <Property Name="Kurst" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Exchange Rate Type"/>
+                <Property Name="Waers" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="Klabc" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="ABC Classification" sap:quickinfo="Customer classification (ABC analysis)"/>
+                <Property Name="Awahr" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Order Probability" sap:quickinfo="Order Probability of the Item"/>
+                <Property Name="Eikto" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Account at customer" sap:quickinfo="Shipper's (Our) Account Number at the Customer or Vendor"/>
+                <Property Name="Begru" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization Group"/>
+                <Property Name="Vkgrp" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Sales group"/>
+                <Property Name="Vkbur" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales office"/>
+                <Property Name="Kdgrp" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Customer Group"/>
+                <Property Name="Bzirk" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Sales District"/>
+                <Property Name="Spart" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Division"/>
+                <Property Name="Vkorg" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Organization"/>
+                <Property Name="Vtweg" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Distribution Channel"/>
+                <Property Name="Zterm" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment terms" sap:quickinfo="Terms of payment key"/>
+                <Property Name="Banks" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Bank Country/Region" sap:quickinfo="Country/Region Key of Bank"/>
+                <Property Name="Bankl" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="Bank Key" sap:quickinfo="Bank Keys"/>
+                <Property Name="Banka" Type="Edm.String" MaxLength="60" sap:label="Bank Name" sap:quickinfo="Name of Financial Institution"/>
+                <Property Name="Bankn" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Bank Account" sap:quickinfo="Bank account number"/>
+                <Property Name="Altkn" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Previous Account No." sap:quickinfo="Previous Master Record Number"/>
+                <Property Name="Xzver" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Record pmnt history" sap:quickinfo="Indicator: Record Payment History ?"/>
+                <Property Name="Zahls" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Payment Block" sap:quickinfo="Block Key for Payment"/>
+                <Property Name="Hbkid" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="House Bank" sap:quickinfo="Short Key for a House Bank"/>
+                <Property Name="Zwels" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Payment Methods" sap:quickinfo="List of Respected Payment Methods"/>
+                <Property Name="Fdgrv" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Planning Group"/>
+                <Property Name="Zuawa" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Sort key" sap:quickinfo="Key for sorting according to assignment numbers"/>
+                <Property Name="Akont" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Reconciliation acct" sap:quickinfo="Reconciliation Account in General Ledger"/>
+                <Property Name="Bukrs" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="Vbund" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Trading Partner No." sap:quickinfo="Company ID of Trading Partner"/>
+                <Property Name="Bahne" Type="Edm.String" MaxLength="25" sap:label="Express station" sap:quickinfo="Express train station"/>
+                <Property Name="Konzs" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Group key"/>
+                <Property Name="Koinh" Type="Edm.String" MaxLength="100"/>
+                <Property Name="J1iexcd" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1iexrn" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1iexrg" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1iexdi" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1iexco" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1iexcicu" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1icstno" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1ilstno" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1isern" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1ipanno" Type="Edm.String" MaxLength="50"/>
+                <Property Name="J1ipanref" Type="Edm.String" MaxLength="50"/>
+                <Property Name="GstTds" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="ZC_WORKFLOW_CType" sap:label="Comment Table" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                    <PropertyRef Name="commentsno"/>
+                </Key>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="commentsno" Type="Edm.Int32" Nullable="false" sap:label="Table Row" sap:quickinfo="ABAP System Field: Row Index of Internal Tables"/>
+                <Property Name="comments" Type="Edm.String" MaxLength="100"/>
+                <Property Name="created_by" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="ZC_WORKFLOW_MESSAGEType" sap:label="message details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ReqId"/>
+                    <PropertyRef Name="CustomerId"/>
+                    <PropertyRef Name="Messageserialno"/>
+                </Key>
+                <Property Name="ReqId" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Messageserialno" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Message" Type="Edm.String" MaxLength="220" sap:display-format="UpperCase" sap:label="Message Text"/>
+            </EntityType>
+            <Association Name="ATN_WORKFLOW_COMMENT" sap:content-version="1">
+                <End Type="ZDEMP_BTP_SRV.ETY_WORKFLOW_HEADER" Multiplicity="1" Role="FromRole_ATN_WORKFLOW_COMMENT"/>
+                <End Type="ZDEMP_BTP_SRV.ETY_WORKFLOW_COMMENT" Multiplicity="*" Role="ToRole_ATN_WORKFLOW_COMMENT"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ATN_WORKFLOW_COMMENT">
+                        <PropertyRef Name="ReqId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ATN_WORKFLOW_COMMENT">
+                        <PropertyRef Name="ReqId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ATN_WORKFLOW_HEADER_ITEM" sap:content-version="1">
+                <End Type="ZDEMP_BTP_SRV.ETY_WORKFLOW_HEADER" Multiplicity="1" Role="FromRole_ATN_WORKFLOW_HEADER_ITEM"/>
+                <End Type="ZDEMP_BTP_SRV.ETY_WORKFLOW_ITEM" Multiplicity="*" Role="ToRole_ATN_WORKFLOW_HEADER_ITEM"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ATN_WORKFLOW_HEADER_ITEM">
+                        <PropertyRef Name="ReqId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ATN_WORKFLOW_HEADER_ITEM">
+                        <PropertyRef Name="ReqId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ATN_WORKFLOW_MESSAGE" sap:content-version="1">
+                <End Type="ZDEMP_BTP_SRV.ETY_WORKFLOW_ITEM" Multiplicity="1" Role="FromRole_ATN_WORKFLOW_MESSAGE"/>
+                <End Type="ZDEMP_BTP_SRV.ETY_WORKFLOW_MESSAGE" Multiplicity="*" Role="ToRole_ATN_WORKFLOW_MESSAGE"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ATN_WORKFLOW_MESSAGE">
+                        <PropertyRef Name="ReqId"/>
+                        <PropertyRef Name="CustomerId"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ATN_WORKFLOW_MESSAGE">
+                        <PropertyRef Name="ReqId"/>
+                        <PropertyRef Name="CustomerId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZDEMP_BTP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_Bank" EntityType="ZDEMP_BTP_SRV.I_BankType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Bank_2" EntityType="ZDEMP_BTP_SRV.I_Bank_2Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_BusinessPartnerGroupingText" EntityType="ZDEMP_BTP_SRV.I_BusinessPartnerGroupingTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_BusinessPartnerRoleText" EntityType="ZDEMP_BTP_SRV.I_BusinessPartnerRoleTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_BusPartCategoryText" EntityType="ZDEMP_BTP_SRV.I_BusPartCategoryTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CompanyCode" EntityType="ZDEMP_BTP_SRV.I_CompanyCodeType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_ControllingAreaStdVH" EntityType="ZDEMP_BTP_SRV.I_ControllingAreaStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CountryText" EntityType="ZDEMP_BTP_SRV.I_CountryTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CreditControlAreaStdVH" EntityType="ZDEMP_BTP_SRV.I_CreditControlAreaStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="I_CurrencyText" EntityType="ZDEMP_BTP_SRV.I_CurrencyTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CustomerAccountAssgmtGroupT" EntityType="ZDEMP_BTP_SRV.I_CustomerAccountAssgmtGroupTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CustomerGroupText" EntityType="ZDEMP_BTP_SRV.I_CustomerGroupTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CustomerPaymentTermsText" EntityType="ZDEMP_BTP_SRV.I_CustomerPaymentTermsTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Customer_VH" EntityType="ZDEMP_BTP_SRV.I_Customer_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_DistributionChannelText" EntityType="ZDEMP_BTP_SRV.I_DistributionChannelTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_DivisionText" EntityType="ZDEMP_BTP_SRV.I_DivisionTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_IncotermsClassificationText" EntityType="ZDEMP_BTP_SRV.I_IncotermsClassificationTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_PaymentTermsText" EntityType="ZDEMP_BTP_SRV.I_PaymentTermsTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="I_Plant" EntityType="ZDEMP_BTP_SRV.I_PlantType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_RegionText" EntityType="ZDEMP_BTP_SRV.I_RegionTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="I_SalesGroupText" EntityType="ZDEMP_BTP_SRV.I_SalesGroupTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_SalesOfficeText" EntityType="ZDEMP_BTP_SRV.I_SalesOfficeTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_SalesOrganizationText" EntityType="ZDEMP_BTP_SRV.I_SalesOrganizationTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_ShippingConditionText" EntityType="ZDEMP_BTP_SRV.I_ShippingConditionTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Supplier_VH" EntityType="ZDEMP_BTP_SRV.I_Supplier_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="P_PlantAddrDetails_Fs" EntityType="ZDEMP_BTP_SRV.P_PlantAddrDetails_FsType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_WORKFLOWHEADER" EntityType="ZDEMP_BTP_SRV.ZC_WORKFLOWHEADERType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_WORKFLOWITEM" EntityType="ZDEMP_BTP_SRV.ZC_WORKFLOWITEMType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_WORKFLOW_C" EntityType="ZDEMP_BTP_SRV.ZC_WORKFLOW_CType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_WORKFLOW_MESSAGE" EntityType="ZDEMP_BTP_SRV.ZC_WORKFLOW_MESSAGEType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ETS_WORKFLOW_HEADERSet" EntityType="ZDEMP_BTP_SRV.ETY_WORKFLOW_HEADER" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ETS_WORKFLOW_ITEMSet" EntityType="ZDEMP_BTP_SRV.ETY_WORKFLOW_ITEM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ETS_WORKFLOW_COMMENTSet" EntityType="ZDEMP_BTP_SRV.ETY_WORKFLOW_COMMENT" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ETS_WORKFLOW_MESSAGESet" EntityType="ZDEMP_BTP_SRV.ETY_WORKFLOW_MESSAGE" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="ATN_WORKFLOW_HEADER_ITEMSet" Association="ZDEMP_BTP_SRV.ATN_WORKFLOW_HEADER_ITEM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETS_WORKFLOW_HEADERSet" Role="FromRole_ATN_WORKFLOW_HEADER_ITEM"/>
+                    <End EntitySet="ETS_WORKFLOW_ITEMSet" Role="ToRole_ATN_WORKFLOW_HEADER_ITEM"/>
+                </AssociationSet>
+                <AssociationSet Name="ATN_WORKFLOW_COMMENTSet" Association="ZDEMP_BTP_SRV.ATN_WORKFLOW_COMMENT" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETS_WORKFLOW_HEADERSet" Role="FromRole_ATN_WORKFLOW_COMMENT"/>
+                    <End EntitySet="ETS_WORKFLOW_COMMENTSet" Role="ToRole_ATN_WORKFLOW_COMMENT"/>
+                </AssociationSet>
+                <AssociationSet Name="ATN_WORKFLOW_MESSAGESet" Association="ZDEMP_BTP_SRV.ATN_WORKFLOW_MESSAGE" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ETS_WORKFLOW_ITEMSet" Role="FromRole_ATN_WORKFLOW_MESSAGE"/>
+                    <End EntitySet="ETS_WORKFLOW_MESSAGESet" Role="ToRole_ATN_WORKFLOW_MESSAGE"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="ZDEMP_BTP_SRV.I_CompanyCodeType/CreditControlArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Credit Control Area"/>
+                        <PropertyValue Property="CollectionPath" String="I_CreditControlAreaStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="CreditControlArea"/>
+                                    <PropertyValue Property="ValueListProperty" String="CreditControlArea"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreditControlArea_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZDEMP_BTP_SRV.I_CompanyCodeType/ControllingArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Controlling Area"/>
+                        <PropertyValue Property="CollectionPath" String="I_ControllingAreaStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ControllingArea"/>
+                                    <PropertyValue Property="ValueListProperty" String="ControllingArea"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ControllingAreaName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZDEMP_BTP_SRV.I_PlantType/PlantCustomer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Customer"/>
+                        <PropertyValue Property="CollectionPath" String="I_Customer_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PlantCustomer"/>
+                                    <PropertyValue Property="ValueListProperty" String="Customer"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="OrganizationBPName1"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="OrganizationBPName2"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Country"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CityName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StreetName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PostalCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CustomerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartner"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZDEMP_BTP_SRV.I_PlantType/PlantSupplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Supplier"/>
+                        <PropertyValue Property="CollectionPath" String="I_Supplier_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PlantSupplier"/>
+                                    <PropertyValue Property="ValueListProperty" String="Supplier"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplierName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartner"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZDEMP_BTP_SRV.ZDEMP_BTP_SRV_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <atom:link rel="self" href="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/sap/ZDEMP_BTP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://usawscl0147.us.deloitte.com:8001/sap/opu/odata/sap/ZDEMP_BTP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,63 @@
+{
+  "name": "MDGProfitCenter",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.12.12",
+    "@sap-cloud-sdk/http-client": "^3.16.0",
+    "@sap-cloud-sdk/resilience": "^3.16.0",
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/hana-client": "^2.21.28",
+    "@sap/xssec": "^3",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/eslint-plugin-cds": "^3",
+    "@sap/hdi-deploy": "4.9.5",
+    "@sap/ux-specification": "^1.120.14",
+    "eslint": "^9",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-profitcenterinitiatorui": "cds watch --open profitcenterinitiatorui/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy MDGProfitCenter --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive"
+  },
+  "cds": {
+    "requires": {
+      "[development]": {
+        "auth": "mocked"
+      },
+      "[production]": {
+        "auth": "xsuaa"
+      },
+      "db": "hana",
+      "ZDEMP_BTP_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZDEMP_BTP_SRV",
+        "credentials": {
+          "destination": "DIM",
+          "path": "/sap/opu/odata/sap/ZDEMP_BTP_SRV",
+          "forwardAuthToken": true
+        }
+      },
+      "hana": {
+        "deploy-format": "hdbtable"
+      }
+    },
+    "cov2app": {
+      "plugin": true
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  }
+}
