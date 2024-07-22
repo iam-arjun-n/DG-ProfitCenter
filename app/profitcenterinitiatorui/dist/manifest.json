@@ -96,6 +96,17 @@
                 {
                     "uri": "css/style.css"
                 }
+            ],
+            "js": [
+                {
+                    "uri": "utils/FileServer.js"
+                },
+                {
+                    "uri": "utils/xlsx.js"
+                },
+                {
+                    "uri": "utils/xlsx.full.min.js"
+                }
             ]
         },
         "routing": {

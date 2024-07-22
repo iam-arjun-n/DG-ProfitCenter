@@ -4,9 +4,9 @@
     xmlns:l="sap.ui.layout">
     <Page id="pProvisionCreate" floatingFooter="true" showNavButton="true" navButtonPress="navButtonPressFunction">
         <content>
-            <Panel id="custPanel" expanded="true" expandable="true" width="auto" class="sapUiResponsiveMargin" headerText="ProfitCenter Master Data - Create">
+            <Panel id="custPanel" expanded="true" expandable="true" width="auto" class="sapUiResponsiveMargin" headerText="{i18n>headerdata}">
                 <content>
-                    <Table id="_IDProfitCenterTable" noDataText="No Data. Use 'Upload' or 'Add new' for adding records" alternateRowColors="false" mode="SingleSelectLeft" items="{ProfitCenterItemModel>/}" selectionChange="onSelectionChange">
+                    <Table id="_IDProfitCenterTable" noDataText="{i18n>nodata}" alternateRowColors="false" mode="SingleSelectLeft" items="{ProfitCenterItemModel>/}" selectionChange="onSelectionChange">
                         <headerToolbar>
                             <OverflowToolbar width="100%" id="toolbar1">
                                 <content>
@@ -14,12 +14,12 @@
                                         <content>
                                             <!-- <sap.ui.unified:FileUploader xmlns:sap.ui.unified="sap.ui.unified" id="fileUploader" change="fileChange"/> -->
                                             <!-- <Button text="Upload" id="bUpd" icon="sap-icon://upload" press="uploadFile" enabled="false"/> -->
-                                            <Button id="_IDButtonDownloadTemplate" text="Download Template" press="onPressDownloadTemplate"/>
+                                            <Button id="_IDButtonDownloadTemplate" text="{i18n>downloadtemplate}" press="onPressDownloadTemplate"/>
                                             <ToolbarSpacer id="_IDCreatePageToolbarSpacer1"/>
-                                            <Button text="Edit" id="bEdit" icon="sap-icon://edit" press="editProfitCenterClassObj" enabled="false"/>
+                                            <Button text="{i18n>Edit}" id="bEdit" icon="sap-icon://edit" press="editProfitCenterClassObj" enabled="false"/>
                                             <!-- <Button text="Extend" id="bExtend" icon="sap-icon://add-activity-2" press="editCustomerobj" enabled="false" visible="false"/>                                             -->
-                                            <Button text="Add New" id="bAdd" icon="sap-icon://add" press="addProfitCenterobj"/>
-                                            <Button text="Delete" id="bDel" icon="sap-icon://delete" press="deleteProfitCenterObj" enabled="false"/>
+                                            <Button text="{i18n>addnew}" id="bAdd" icon="sap-icon://add" press="addProfitCenterobj"/>
+                                            <Button text="{i18n>Delete}" id="bDel" icon="sap-icon://delete" press="deleteProfitCenterObj" enabled="false"/>
                                             <!-- <Button icon="sap-icon://excel-attachment" id="export" text="Export" press="onExportFilledData" enabled="false" visible="false"/> -->
                                         </content>
                                     </OverflowToolbar>
@@ -27,17 +27,17 @@
                             </OverflowToolbar>
                         </headerToolbar>
                         <columns>
-                            <Column id="_IDCreatePageProfitCenterClass" >
+                            <Column id="_IDCreatePageProfitCenterClass">
                                 <header>
-                                    <Label id="_IDCreatePageLabel1" text="ProfitCenter Class"/>
-                                </header>
-                            </Column>                        
-                            <Column id="_IDCreatePageColumn1">
-                                <header>
-                                    <Label id="_IDCreatePageLabel2" text="Description"/>
+                                    <Label id="_IDCreatePageLabel1" text="{i18n>profitcenter}"/>
                                 </header>
                             </Column>
-                            <Column id="_IDCreatePageColumn2">
+                            <Column id="_IDCreatePageColumn1">
+                                <header>
+                                    <Label id="_IDCreatePageLabel2" text="{i18n>controllingarea}"/>
+                                </header>
+                            </Column>
+                            <!-- <Column id="_IDCreatePageColumn2">
                                 <header>
                                     <Label id="_IDCreatePageLabel3" text="ProfitCenter Main Text"/>
                                 </header>
@@ -46,16 +46,16 @@
                                 <header>
                                     <Label id="_IDCreatePageLabel4" text="Account Determination"/>
                                 </header>
-                            </Column>
-                            
+                            </Column> -->
+
                         </columns>
                         <items>
-                            <ColumnListItem id="_IDCreatePageColumnListItem1" >
+                            <ColumnListItem id="_IDCreatePageColumnListItem1">
                                 <cells>
-                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier1" title="{ProfitCenterItemModel>ProfitCenterClass}"/>
-                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier2" title="{ProfitCenterItemModel>Description}"/>
-                                    <Text id="_IDCreatePageText1" text="{ProfitCenterItemModel>ProfitCenterMainText}"/>
-                                    <Text id="_IDCreatePageText2" text="{ProfitCenterItemModel>AccountDetermination}"/>
+                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier1" title="{ProfitCenterItemModel>ProfitCenter}"/>
+                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier2" title="{ProfitCenterItemModel>ControllingArea}"/>
+                                    <!-- <Text id="_IDCreatePageText1" text="{ProfitCenterItemModel>ProfitCenterMainText}"/>
+                                    <Text id="_IDCreatePageText2" text="{ProfitCenterItemModel>AccountDetermination}"/> -->
                                 </cells>
                             </ColumnListItem>
                         </items>
@@ -63,9 +63,9 @@
                     </Table>
                 </content>
             </Panel>
-            <Panel id="_IDCreatePagePanel1" expanded="true" expandable="true" headerText="Comments" width="auto" class="sapUiResponsiveMargin">
+            <Panel id="_IDCreatePagePanel1" expanded="true" expandable="true" headerText="{i18n>comments}" width="auto" class="sapUiResponsiveMargin">
                 <content>
-                    <FeedInput id="fIC" post="onPostComment" class="sapUiSmallMarginTopBottom" maxLength="100" placeholder="Add a comment - Character length limited to 100"/>
+                    <FeedInput id="fIC" post="onPostComment" class="sapUiSmallMarginTopBottom" maxLength="100" placeholder="{i18n>placeholderCommentBox}"/>
                     <List showSeparators="Inner" items="{commentModel>/}" id="flist">
                         <FeedListItem id="_IDCreatePageFeedListItem1" sender="{commentModel>UserName}" timestamp="{commentModel>Date}" text="{commentModel>Text}"/>
                     </List>
@@ -76,9 +76,9 @@
             <OverflowToolbar id="_IDCreatePageOverflowToolbar2">
                 <Button id="bMsg" icon="sap-icon://message-popup" press="handleMessagePopoverPress" text="{messageall>/messagesLength}"/>
                 <ToolbarSpacer id="_IDCreatePageToolbarSpacer2"/>
-                <Button text="Validate" id="bValidate" icon="sap-icon://validate" type="Ghost" press="validateAll"/>
+                <Button text="{i18n>validate}" id="bValidate" icon="sap-icon://validate" type="Ghost" press="validateAll"/>
                 <!-- <Button text="Send for Approval" id="bSend" icon="sap-icon://paper-plane" type="Accept" press="initiateApprovalProcess"/> -->
-                <Button text="Send for Approval" id="bSend" icon="sap-icon://paper-plane" type="Accept" press="triggerWorkflowFn"/>
+                <Button text="{i18n>sendforapproval}" id="bSend" icon="sap-icon://paper-plane" type="Accept" press="triggerWorkflowFn"/>
                 <content/>
             </OverflowToolbar>
         </footer>

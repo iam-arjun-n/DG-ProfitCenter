@@ -9,21 +9,21 @@
         <f:title>
             <f:DynamicPageTitle id="_IDOverviewDynamicPageTitle1" backgroundDesign="Transparent">
                 <f:heading>
-                    <Title id="_IDOverviewTitle1" text="Master Data - Create Requests"/>
+                    <Title id="_IDOverviewTitle1" text="{i18n>headertitle}"/>
                 </f:heading>
                 <f:actions>
                     <ToolbarSpacer id="_IDOverviewToolbarSpacer1" />
                     <MenuButton id="_IDOverviewMenuButton1" text="{i18n>create}" buttonMode="Split" useDefaultActionOnly="true" type="Emphasized">
                         <menu>
                             <Menu id="_IDOverviewMenu1" itemSelected="onMenuAction">
-                                <MenuItem key="A" id="mCR" text="{i18n>asset}" icon="sap-icon://bar-code"/>
+                                <MenuItem key="A" id="mCR" text="{i18n>profitcenter}" icon="sap-icon://bar-code"/>
                             </Menu>
                         </menu>
                     </MenuButton>
                     <MenuButton id="_IDOverviewMenuButton2" text="{i18n>dispChange}" buttonMode="Split" useDefaultActionOnly="true" type="Emphasized">
                         <menu>
                             <Menu id="_IDOverviewMenu2" itemSelected="onMenuActionDisplay">
-                                <MenuItem key="A" id="dCR" text="{i18n>asset}" icon="sap-icon://bar-code"/>
+                                <MenuItem key="A" id="dCR" text="{i18n>profitcenter}" icon="sap-icon://bar-code"/>
                             </Menu>
                         </menu>
                     </MenuButton>
@@ -35,40 +35,40 @@
                 <f:content>
                     <fb:FilterBar id="filterbar" reset="onClear" clear="onClear" search="onGo" showFilterConfiguration="false" useToolbar="false" showGoOnFB="true" showClearOnFB="true">
                         <fb:filterGroupItems>
-                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem1" groupName="g1" name="A" label="Request Number" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem1" groupName="g1" name="A" label="{i18n>reqnumber}" visibleInFilterBar="true">
                                 <fb:control>
-                                    <MultiInput name="Request Status" id="REQ" valueHelpRequest="REQHelp"/>
+                                    <MultiInput name="{i18n>reqstatus}" id="REQ" valueHelpRequest="REQHelp"/>
                                 </fb:control>
                             </fb:FilterGroupItem>
-                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem2" groupName="g1" name="B" label="Status" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem2" groupName="g1" name="B" label="{i18n>status}" visibleInFilterBar="true">
                                 <fb:control>
                                     <Select xmlns="sap.m" id="rStat" forceSelection="false">
                                         <items>
                                             <core:Item id="_IDOverviewItem1"
-                                                xmlns:core="sap.ui.core" key="A" text="In Approval"/>
+                                                xmlns:core="sap.ui.core" key="A" text="{i18n>inapproval}"/>
                                             <core:Item id="_IDOverviewItem2"
-                                                xmlns:core="sap.ui.core" key="C" text="Completed"/>
+                                                xmlns:core="sap.ui.core" key="C" text="{i18n>completed}"/>
                                             <core:Item id="_IDOverviewItem3"
-                                                xmlns:core="sap.ui.core" key="R" text="Rejected"/>
+                                                xmlns:core="sap.ui.core" key="R" text="{i18n>rejected}"/>
                                         </items>
                                     </Select>
                                 </fb:control>
                             </fb:FilterGroupItem>
 
-                            <fb:FilterGroupItem id="fgType" groupName="g1" name="objType" label="Type" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="fgType" groupName="g1" name="objType" label="{i18n>type}" visibleInFilterBar="true">
                                 <fb:control>
                                     <Select xmlns="sap.m" id="objType" forceSelection="false">
                                         <items>
                                             <core:Item id="createItem"
-                                                xmlns:core="sap.ui.core" key="Create" text="Create"/>
+                                                xmlns:core="sap.ui.core" key="Create" text="{i18n>create}"/>
                                             <core:Item id="modItem"
-                                                xmlns:core="sap.ui.core" key="Change" text="Change"/>
+                                                xmlns:core="sap.ui.core" key="Change" text="{i18n>change}"/>
                                         </items>
                                     </Select>
                                 </fb:control>
                             </fb:FilterGroupItem>
 
-                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem3" groupName="g1" name="D" label="Creation Date" visibleInFilterBar="true">
+                            <fb:FilterGroupItem id="_IDOverviewFilterGroupItem3" groupName="g1" name="D" label="{i18n>creationdate}" visibleInFilterBar="true">
                                 <fb:control>
                                     <DatePicker displayFormat="dd-MM-yyyy" id="crDate"/>
                                 </fb:control>
@@ -80,48 +80,48 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <Table noDataText="No data to display" id="table" alternateRowColors="true" includeItemInSelection="true" mode="SingleSelectLeft" updateStarted="upstarted" items="{/ETY_WORKFLOW_HEADERSet}" sticky="HeaderToolbar,ColumnHeaders" growing="true" growingThreshold="50" selectionChange="overviewTableSelectionChange">
+            <Table noDataText="{i18n>nodata}" id="table" alternateRowColors="true" includeItemInSelection="true" mode="SingleSelectLeft" updateStarted="upstarted" items="{/ETY_WORKFLOW_HEADERSet}" sticky="HeaderToolbar,ColumnHeaders" growing="true" growingThreshold="50" selectionChange="overviewTableSelectionChange">
                 <headerToolbar>
                     <OverflowToolbar id="_IDOverviewOverflowToolbar">
                         <ToolbarSpacer id="_IDOverviewToolbarSpacer"/>
-                        <Button id="_IDOverviewViewButton" text="View" press="onPressViewData" enabled="false"/>
+                        <Button id="_IDOverviewViewButton" text="{i18n>view}" press="onPressViewData" enabled="false"/>
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
                     <Column id="_IDOverviewColumn1" width="6em">
                         <header>
-                            <Label id="_IDOverviewLabel1" text="Request Number" />
+                            <Label id="_IDOverviewLabel1" text="{i18n>reqnumber}" />
                         </header>
                     </Column>
                     <Column id="_IDOverviewColumn2" demandPopin="true" minScreenWidth="Desktop" width="6em">
                         <header>
-                            <Label id="_IDOverviewLabel2" text="Status" />
+                            <Label id="_IDOverviewLabel2" text="{i18n>status}" />
                         </header>
                     </Column>
 
                     <Column id="_IDOverviewColumn3" width="5em" demandPopin="true" minScreenWidth="Desktop">
                         <header>
-                            <Text id="_IDOverviewText1" text="Type" />
+                            <Text id="_IDOverviewText1" text="{i18n>type}" />
                         </header>
                     </Column>
                     <Column id="_IDOverviewColumn4" width="5em" demandPopin="true" minScreenWidth="Desktop">
                         <header>
-                            <Text id="_IDOverviewText2" text="Tab Combination" />
+                            <Text id="_IDOverviewText2" text="{i18n>tabcombination}" />
                         </header>
                     </Column>
                     <Column id="_IDOverviewColumn5" demandPopin="true" minScreenWidth="Desktop" width="6em">
                         <header>
-                            <Text id="text18_1617707769875" text="Object"/>
+                            <Text id="text18_1617707769875" text="{i18n>object}"/>
                         </header>
                     </Column>
                     <Column id="_IDOverviewColumn6" demandPopin="true" minScreenWidth="Desktop" width="5em">
                         <header>
-                            <Text id="_IDOverviewText3" text="Created On"/>
+                            <Text id="_IDOverviewText3" text="{i18n>createdon}"/>
                         </header>
                     </Column>
                     <Column id="_IDOverviewColumn7" width="8em">
                         <header>
-                            <Text text="Created By" id="text20"/>
+                            <Text text="{i18n>createdby}" id="text20"/>
                         </header>
                     </Column>
                 </columns>

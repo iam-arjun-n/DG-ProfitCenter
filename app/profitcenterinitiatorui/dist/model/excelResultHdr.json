@@ -1,0 +1,27 @@
+[
+    {
+        "label": "RequestId",
+        "property": "RequestId",
+        "type": "string"
+    },
+    {
+        "label": "BusinessPartner",
+        "property": "BusinessPartner",
+        "type": "string"
+    }
+    ,{
+        "label": "BusinessPartnerName",
+        "property": "BusinessPartnerName",
+        "type": "string"
+    }
+    ,{
+        "label": "Status",
+        "property": "ExcelStatus",
+        "type": "string"
+    }
+    ,{
+        "label": "ErrorResponse",
+        "property": "concatenatedMessage",
+        "type": "string"
+    }
+]

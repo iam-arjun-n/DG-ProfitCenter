@@ -1,0 +1,25 @@
+[
+  {
+    "Name": "AssetMasterData",
+    "data": [
+      {
+        "bukrs": "",
+        "Description": "",
+        "AssetClass": "",
+        "AssetMainText": "",
+        "AccountDetermination": "",
+        "CostCenter": "",
+        "BusinessArea": "",
+        "ProfitCenter": "",
+        "Segment": "",
+        "EvaluationGroup1": "",
+        "EvaluationGroup2": "",
+        "EvaluationGroup3": "",
+        "EvaluationGroup4": "",
+        "EvaluationGroup5": "",
+        "lifnr": "",
+        "NoofSimilarAssets": ""
+      }
+    ]
+  }
+]

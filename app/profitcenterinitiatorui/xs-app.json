@@ -3,6 +3,13 @@
   "authenticationMethod": "route",
   "routes": [
     {
+      "source" : "^/bpmworkflowruntime/v1/(.*)$",
+      "target" : "/public/workflow/rest/v1/",
+      "service" : "com.sap.spa.processautomation",
+      "endpoint" : "api",
+      "authenticationType" : "xsuaa"
+    },
+    {
       "source": "^/odata/v2/pcservice/(.*)$",
       "target": "/odata/v2/pcservice/$1",
       "destination": "profitcenter-srv-api",

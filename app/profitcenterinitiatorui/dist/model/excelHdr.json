@@ -1,0 +1,291 @@
+[
+    {
+        "label": "ExternalBPNumber",
+        "property": "extbp",
+        "type": "string"
+    },
+
+    {
+        "label": "BusinessPartnerCategory",
+        "property": "bpcatg",
+        "type": "string"
+    },
+
+    {
+        "label": "BusinessPartnerGrouping",
+        "property": "bpgrp",
+        "type": "string"
+    },
+
+    {
+        "label": "BProle1",
+        "property": "bprole1",
+        "type": "string"
+    },
+
+    {
+        "label": "BProle2",
+        "property": "bprole2",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Name1",
+        "property": "name1",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Searchterm1",
+        "property": "srctrm1",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Street",
+        "property": "street",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Postalcode",
+        "property": "pcode",
+        "type": "string"
+    }
+
+    ,{
+        "label": "City",
+        "property": "city1",
+        "type": "string"
+    }
+    ,{
+        "label": "CountryKey",
+        "property": "ckey",
+        "type": "string"
+    }
+    ,{
+        "label": "Region",
+        "property": "region1",
+        "type": "string"
+    }
+    ,{
+        "label": "LanguageKey",
+        "property": "langkey",
+        "type": "string"
+    }
+    ,{
+        "label": "MobilePhone",
+        "property": "mphone",
+        "type": "string"
+    }
+    ,{
+        "label": "EMailAddress",
+        "property": "email",
+        "type": "string"
+    },
+
+
+    {
+        "label": "Delivery_Name1",
+        "property": "name2",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Delivery_Searchterm1",
+        "property": "srctrm2",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Delivery_Street",
+        "property": "street2",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Delivery_Postalcode",
+        "property": "pcode2",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Delivery_City",
+        "property": "city2",
+        "type": "string"
+    }
+    ,{
+        "label": "Delivery_CountryKey",
+        "property": "ckey2",
+        "type": "string"
+    }
+    ,{
+        "label": "Delivery_Region",
+        "property": "region2",
+        "type": "string"
+    }
+    ,{
+        "label": "Delivery_LanguageKey",
+        "property": "langkey2",
+        "type": "string"
+    }
+    ,{
+        "label": "Delivery_MobilePhone",
+        "property": "mphone2",
+        "type": "string"
+    }
+    ,{
+        "label": "Delivery_EMailAddress",
+        "property": "email2",
+        "type": "string"
+    },
+
+
+
+    {
+        "label": "Billing_Name1",
+        "property": "name3",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Billing_Searchterm1",
+        "property": "srctrm3",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Billing_Street",
+        "property": "street3",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Billing_Postalcode",
+        "property": "pcode3",
+        "type": "string"
+    }
+
+    ,{
+        "label": "Billing_City",
+        "property": "city3",
+        "type": "string"
+    }
+    ,{
+        "label": "Billing_CountryKey",
+        "property": "ckey3",
+        "type": "string"
+    }
+    ,{
+        "label": "Billing_Region",
+        "property": "region3",
+        "type": "string"
+    }
+    ,{
+        "label": "Billing_LanguageKey",
+        "property": "langkey3",
+        "type": "string"
+    }
+    ,{
+        "label": "Billing_MobilePhone",
+        "property": "mphone3",
+        "type": "string"
+    }
+    ,{
+        "label": "Billing_EMailAddress",
+        "property": "email3",
+        "type": "string"
+    },
+    {
+        "label": "ExciseRange",
+        "property": "erange",
+        "type": "string"
+    }
+    ,{
+        "label": "PermanentAccountNumber",
+        "property": "pan1",
+        "type": "string"
+    },
+    {
+        "label": "PurchasingOrganisation",
+        "property": "porg",
+        "type": "string" 
+    },
+    {
+        "label": "OrderCurrency",
+        "property": "orderCurr",
+        "type": "string" 
+    },
+    
+    {
+        "label": "Paymentterms",
+        "property": "payterms",
+        "type": "string" 
+    },
+    {
+        "label": "Incoterms",
+        "property": "incoterms",
+        "type": "string"
+    },
+    {
+        "label": "ShippingConditions",
+        "property": "shipcondt",
+        "type": "string"
+    },
+    {
+        "label": "GRBasedIV",
+        "property": "gr",
+        "type": "string" 
+    },
+
+    {
+        "label": "SrvBasedInvVer",
+        "property": "serviceinv",
+        "type": "string" 
+    }
+    ,
+
+    {
+        "label": "AutomaticPO",
+        "property": "autopo",
+        "type": "string" 
+    } ,
+
+    {
+        "label": "ConfirmationControl",
+        "property": "confirmcont",
+        "type": "string" 
+    }
+    ,
+
+    {
+        "label": "SchemaGroupSupplier",
+        "property": "schemagrp",
+        "type": "string" 
+    }
+    ,{
+        "label": "CompanyCode",
+        "property": "compcode",
+        "type": "string"
+    }
+    ,{
+        "label": "ReconciliationAccount",
+        "property": "reconaccnt",
+        "type": "string"
+    }
+    ,{
+        "label": "SortKey",
+        "property": "sortkey",
+        "type": "string"
+    }
+    ,{
+        "label": "PlanningGroup",
+        "property": "plangrp",
+        "type": "string"
+    }
+    ,{
+        "label": "Paymentterms",
+        "property": "paytrms",
+        "type": "string"
+    }
+]
