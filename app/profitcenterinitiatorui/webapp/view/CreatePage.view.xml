@@ -6,7 +6,7 @@
         <content>
             <Panel id="custPanel" expanded="true" expandable="true" width="auto" class="sapUiResponsiveMargin" headerText="{i18n>headerdata}">
                 <content>
-                    <Table id="_IDProfitCenterTable" noDataText="{i18n>nodata}" alternateRowColors="false" mode="SingleSelectLeft" items="{ProfitCenterItemModel>/}" selectionChange="onSelectionChange">
+                    <Table id="_IDProfitCenterTable" noDataText="{i18n>nodata}" alternateRowColors="false" mode="SingleSelectLeft" items="{pcModel>/LineItems}" selectionChange="onSelectionChange">
                         <headerToolbar>
                             <OverflowToolbar width="100%" id="toolbar1">
                                 <content>
@@ -52,8 +52,8 @@
                         <items>
                             <ColumnListItem id="_IDCreatePageColumnListItem1">
                                 <cells>
-                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier1" title="{ProfitCenterItemModel>ProfitCenter}"/>
-                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier2" title="{ProfitCenterItemModel>ControllingArea}"/>
+                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier1" title="{pcModel>profitcenter}"/>
+                                    <ObjectIdentifier id="_IDCreatePageObjectIdentifier2" title="{pcModel>controllingarea}"/>
                                     <!-- <Text id="_IDCreatePageText1" text="{ProfitCenterItemModel>ProfitCenterMainText}"/>
                                     <Text id="_IDCreatePageText2" text="{ProfitCenterItemModel>AccountDetermination}"/> -->
                                 </cells>
@@ -63,11 +63,12 @@
                     </Table>
                 </content>
             </Panel>
-            <Panel id="_IDCreatePagePanel1" expanded="true" expandable="true" headerText="{i18n>comments}" width="auto" class="sapUiResponsiveMargin">
+            <Panel id="pnlComments" expanded="true" expandable="true" headerText="Comments" width="auto" class="sapUiResponsiveMargin">
                 <content>
-                    <FeedInput id="fIC" post="onPostComment" class="sapUiSmallMarginTopBottom" maxLength="100" placeholder="{i18n>placeholderCommentBox}"/>
+                    <FeedInput id="fIC" post="onPostComment" class="sapUiSmallMarginTopBottom" maxLength="100" placeholder="Add a comment - Character length limited to 100" icon="sap-icon://comment" rows="1"/>
                     <List showSeparators="Inner" items="{commentModel>/}" id="flist">
-                        <FeedListItem id="_IDCreatePageFeedListItem1" sender="{commentModel>UserName}" timestamp="{commentModel>Date}" text="{commentModel>Text}"/>
+                        <FeedListItem id="fliComment" sender="{commentModel>UserName}" showIcon="true"
+    icon="sap-icon://person-placeholder" timestamp="{commentModel>Date}" text="{commentModel>Text}"/>
                     </List>
                 </content>
             </Panel>
@@ -78,7 +79,7 @@
                 <ToolbarSpacer id="_IDCreatePageToolbarSpacer2"/>
                 <Button text="{i18n>validate}" id="bValidate" icon="sap-icon://validate" type="Ghost" press="validateAll"/>
                 <!-- <Button text="Send for Approval" id="bSend" icon="sap-icon://paper-plane" type="Accept" press="initiateApprovalProcess"/> -->
-                <Button text="{i18n>sendforapproval}" id="bSend" icon="sap-icon://paper-plane" type="Accept" press="triggerWorkflowFn"/>
+                <Button text="{i18n>sendforapproval}" id="bSend" icon="sap-icon://paper-plane" type="Accept" press="initiateApprovalProcess"/>
                 <content/>
             </OverflowToolbar>
         </footer>

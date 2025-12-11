@@ -23,6 +23,22 @@
           "annotations": [],
           "odataVersion": "2.0"
         }
+      },
+      "profitService":{
+        "uri": "/sap/opu/odata/sap/ZMATERIAL_MASTER_SRV",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "2.0"
+        }
+      },
+      "materialService":{
+        "uri": "/sap/opu/odata/sap/ZMATERIAL_MASTER_SRV",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "2.0"
+        }
       }
     },
     "crossNavigation": {
@@ -84,6 +100,22 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "profitCenterModel":{
+        "dataSource": "profitService",
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "ZMaterialModel":{
+        "dataSource": "materialService",
         "settings": {
           "operationMode": "Server",
           "autoExpandSelect": true,

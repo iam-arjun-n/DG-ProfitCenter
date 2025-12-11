@@ -15,6 +15,7 @@ modules:
       srv-url: ${default-url}
   parameters:
     buildpack: nodejs_buildpack
+    memory: 128M
     readiness-health-check-http-endpoint: /health
     readiness-health-check-type: http
   build-parameters:
