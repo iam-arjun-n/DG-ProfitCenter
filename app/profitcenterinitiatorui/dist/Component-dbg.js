@@ -5,9 +5,10 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "mdg/profitcenter/ui/profitcenterinitiatorui/model/models"
+        "mdg/profitcenter/ui/profitcenterinitiatorui/model/models",
+         "sap/ui/model/json/JSONModel"
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models,JSONModel) {
         "use strict";
 
         return UIComponent.extend("mdg.profitcenter.ui.profitcenterinitiatorui.Component", {
@@ -23,6 +24,18 @@ sap.ui.define([
             init: function () {
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
+
+                let userId = "DEFAULT_USER";
+
+                if (sap.ushell?.Container?.getUser) {
+                    userId = sap.ushell.Container.getUser().getEmail();
+                }
+
+                let userModel = new JSONModel({
+                    currentUser: userId
+                });
+
+                this.setModel(userModel, "userModel");
 
                 // enable routing
                 this.getRouter().initialize();

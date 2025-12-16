@@ -1,45 +1,60 @@
 const cds = require("@sap/cds");
+const SequenceHelper = require("./lib/SequenceHelper");
 
 class ProfitCenterService extends cds.ApplicationService {
-    init() {
-        this.before(["CREATE"], "ETY_WORKFLOW_HEADERSet", async context => {
-            const db = await cds.connect.to("db");
+  async init() {
+    const db = await cds.connect.to("db");
+    const {
+      ETY_WORKFLOW_HEADER,
+      ETY_WORKFLOW_ITEM
+    } = this.entities;
 
-            // Changing the key value when requested from workflow ui5 alone : 
-            if (context.data.ReqId === "NEWREQUEST" || context.data.ReqId === "CHANGEREQUEST" || context.data.ReqId === "EXTENDREQUEST") {
-                // const productId = new SequenceHelper({
-                //     db: db,
-                //     sequence: "ID",
-                //     table: "MDG_ASSETMASTER_ETY_WORKFLOW_HEADER",
-                //     field: "ID"
-                // });
-
-                context.data.ID = await db.run(`SELECT MAX(ID) FROM "MDGPROFITCENTER_DB_ETY_WORKFLOW_HEADER"`)
-                    .then(result => {
-                        let nextNumber = result[0]['MAX(ID)'] ? result[0]['MAX(ID)'] : 0;
-                        nextNumber += 1;
-                        return nextNumber;
-                    });
-                // const req_id = "REQ";
-                //	const req_id = (context.data.ReqId === "NEWREQUEST") ? "REQ" : "CRQ";
-                const req_id = (context.data.ReqId === "NEWREQUEST") ? "REQ" : (context.data.ReqId === "CHANGEREQUEST") ? "CRQ" : "EXQ";
-                let number = context.data.ID;
-                let seq = number.toString().padStart(7, '0');
-                let reqid = req_id + seq;
-
-                context.data.ReqId = reqid;
-                console.log("request id", reqid)
-            }
+    this.before("CREATE", ETY_WORKFLOW_HEADER, async (req) => {
+      let requestIdSequence;
+      if (db.kind === "postgres") {
+        requestIdSequence = new SequenceHelper({
+          db: db,
+          sequence: "reqid",
+          table: "com_deloitte_mdg_productionversion_ety_workflow_header",
+          field: "reqid",
         });
-
-        this.on('READ', 'CompanyCodeVH', async function (req, res) {
-            const ZDEMPBTPSRV = await cds.connect.to("ZDEMP_BTP_SRV");
-            return ZDEMPBTPSRV.run(req.query);
+      } else if (db.kind === "sqlite") {
+        requestIdSequence = new SequenceHelper({
+          db: db,
+          sequence: "ReqId",
+          table: "mdg_profitcenter_ui_ety_workflow_header",
+          field: "ReqId",
         });
-        return super.init()
-    }
+      } else if (db.kind === "hana") {
+        requestIdSequence = new SequenceHelper({
+          db: db,
+          sequence: "REQID",
+          table: "MDGPROFITCENTER_DB_ETY_WORKFLOW_HEADER",
+          field: "REQID",
+        });
+      }
+
+      let prefix = "REQ";
+      const type =  req.data.Type;
+
+      if (type === "Change") {
+        prefix = "CRQ";
+      } else if (type === "Extend") {
+        prefix = "EXQ";
+      }
+
+      const tx = cds.transaction(req);
+      await tx.run(async () => {
+        req.data.requestIdSequence = await requestIdSequence.getNextNumber();
+        let zeroChars = Array(7 - req.data.requestIdSequence.toString().length).fill(0).join("");
+        req.data.ReqId = prefix + zeroChars + req.data.requestIdSequence;
+  
+      });
+    });
+    return super.init();
+  }
 }
 
 module.exports = {
-    ProfitCenterService
-}
+  ProfitCenterService,
+};

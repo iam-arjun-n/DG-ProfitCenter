@@ -8,14 +8,18 @@ function (Controller) {
         onInit: function () {
 
         },
-        onMenuAction: function (oEvent) {
-            var oItem = oEvent.getParameter("item");
-            var sItem = oItem.getKey();
-            var oRouter = this.getOwnerComponent().getRouter();
+        // onMenuAction: function (oEvent) {
+        //     var oItem = oEvent.getParameter("item");
+        //     var sItem = oItem.getKey();
+        //     var oRouter = this.getOwnerComponent().getRouter();
 
-            oRouter.navTo("CreateRoute", {
-                key: sItem
-            });
+        //     oRouter.navTo("CreateRoute", {
+        //         key: sItem
+        //     });
+        // },
+        onCreatePress: function () {
+            debugger;
+            this.getOwnerComponent().getRouter().navTo("CreateRoute");
         },
         onMenuActionDisplay: function (oEvent) {
             var oItem = oEvent.getParameter("item");

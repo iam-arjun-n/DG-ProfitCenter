@@ -97,7 +97,7 @@
                     "bundleName": "mdg.profitcenter.ui.profitcenterinitiatorui.i18n.i18n"
                 }
             },
-            "": {
+            "mainServiceModel": {
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {
@@ -161,7 +161,7 @@
                 },
                 {
                     "name": "CreateRoute",
-                    "pattern": "create/{key}",
+                    "pattern": "create",
                     "target": [
                         "TargetCreateRoute"
                     ]

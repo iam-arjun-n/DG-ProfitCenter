@@ -94,7 +94,8 @@ sap.ui.define(
 
         addProfitCenterobj: async function () {
 
-
+          this._editIndex = undefined; // store index for updating
+        this._isEditMode = false;
           this._clearValueStates();
           this._clearMessageManager();
           this._mode = "A"; //add
@@ -161,6 +162,61 @@ sap.ui.define(
           // }, 0);
 
         },
+
+        editProfitCenterClassObj:function(){
+          const oTable = this.byId("_IDProfitCenterTable");
+        const oSelectedItem = oTable.getSelectedItem();
+        if (!oSelectedItem) {
+          sap.m.MessageToast.show("Please select a record to edit.");
+          return;
+        }
+        const oModel = this.getView().getModel("pcModel");
+        const oData = oSelectedItem.getBindingContext("pcModel");
+        var sPath = oData.getPath();
+        this._editIndex = parseInt(sPath.split("/")[2]); // store index for updating
+        this._isEditMode = true;
+        var sProfitCenter = oData.getProperty(sPath + "/profitcenter");
+        this.fetchData(sProfitCenter, sPath);
+        },
+
+        fetchData: function (sProfitCenter, sPath) {
+        var oModel = this.getView().getModel("pcModel");
+        var pcData = oModel.getProperty("/LineItems");
+        var oSelectedData = pcData.find(item => item.profitcenter === sProfitCenter);
+        this.openEdit(oSelectedData, sPath);
+      },
+
+      openEdit: function (oSelectedData, sPath) {
+        var osharedModel = this.getView().getModel("pcModel");
+        osharedModel.setProperty("/SelectedItem", oSelectedData);
+        // osharedModel.setData(oSelectedData);
+        // var Router = this.getOwnerComponent().getRouter();
+        // Router.navTo("Edit");
+        var oMainModel = this.getView().getModel("pcModel");
+                var aLineItems = oMainModel.getProperty("/LineItems") || [];
+                var oSelectedRow = aLineItems[this._editIndex] || {};
+
+                var oLocalModel = this.getView().getModel("oPCModel");
+                if (oLocalModel) {
+                    oLocalModel.setData(oSelectedRow );
+                }
+
+                if (!this._PCFragment) {
+            this._PCFragment =  Fragment.load({
+              id: oView.getId(),
+              name: "mdg.profitcenter.ui.profitcenterinitiatorui.fragments.CreatePC",
+              controller: this,
+            });
+          }
+ let oView=this.getView();
+          oView.addDependent(this._PCFragment);
+
+          //initialise data model
+         
+          this.byId("dAddProfitCenter").setTitle(`Edit Profit Center`);
+
+          this._PCFragment.open();
+      },
 
         /** to close /cancel fragment */
 
@@ -295,7 +351,7 @@ sap.ui.define(
           var sValue = oEvent.getParameter("value");
           var aComments = oComments.getData();
           var oEntry = {
-            UserName: this.getOwnerComponent().currentUser || "test@user.com",
+            UserName: this.getOwnerComponent()?.getModel("userModel")?.getProperty("/currentUser") || "test@user.com",
             Date: "" + sDate,
             Text: sValue,
           };
@@ -362,8 +418,7 @@ sap.ui.define(
             // Auto-open message popover or show toast
             MessageToast.show("Please correct the errors.");
             return; // stop save
-          }
-          ;
+          };
 
 
           // If valid → proceed with save
@@ -384,8 +439,12 @@ sap.ui.define(
             enteredOn: this.byId("_IDCreatePCDatePicker3").getValue()
           };
 
+          if(this._isEditMode){
+            aLineItems[this._editIndex]=oSelectedItem;
+          }else{
           // Push new item
           aLineItems.push({ ...oSelectedItem });
+          }
 
           // Update model
           oPCModel.setProperty("/SelectedItem", oSelectedItem);
@@ -790,7 +849,7 @@ sap.ui.define(
           return new Promise((resolve, reject) => {
             let payload = that.PayloadData();
             let model = that.getView().getModel("mainServiceModel");
-            model.create("/ETY_WORKFLOW_HEADER", payload, {
+            model.create("/ETY_WORKFLOW_HEADERSet", payload, {
               success: function (data) {
                 resolve(data.ReqId);
               },
@@ -920,7 +979,7 @@ sap.ui.define(
           comments.forEach(comment => {
             finalComments.push({
               "Comment": comment.Text,
-              "Username": currentUser
+              "Username": this.getOwnerComponent()?.getModel("userModel")?.getProperty("/currentUser") ||"test@user.com"
             });
           });
 
@@ -945,14 +1004,14 @@ sap.ui.define(
         },
 
         PayloadData: function () {
-          let pcModel = this.getView().getModel();
+          let pcModel = this.getView().getModel("mainServiceModel");
           let Comments = this.getComments();
           let Type = pcModel.getProperty("/Type");
-          let CreatedBy = this.getOwnerComponent().getModel("userModel").getProperty("/currentUser") || "defaultUser";
+          let CreatedBy = this.getOwnerComponent()?.getModel("userModel")?.getProperty("/currentUser") || "defaultUser";
           const oComponent = this.getOwnerComponent();
           var PcCollection = this.getView().getModel("pcModel").getData().LineItems;
           const oData = {
-            Status: "In progress",
+            Status: "In Progress",
             WorkflowStatus: "In Approval",
             Type: "Create",
             CreatedBy: CreatedBy,
