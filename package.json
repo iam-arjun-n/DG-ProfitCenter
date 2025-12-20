@@ -22,14 +22,17 @@
     "@sap/hdi-deploy": "4.9.5",
     "@sap/ux-specification": "^1.120.14",
     "eslint": "^9",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "cds-plugin-ui5": "^0.13.0",
+    "mbt": "^1.2.29"
   },
   "scripts": {
     "start": "cds-serve",
-    "deploy": "cf deploy mta_archives/MDGProfitCenter_1.0.0.mtar --retries 1",
-    "watch-profitcenterinitiatorui": "cds watch --open profitcenterinitiatorui/webapp/index.html?sap-ui-xx-viewCache=false",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-profitcenterinitiatorui": "cds watch --open mdg.profitcenter.ui.profitcenterinitiatorui/index.html?sap-ui-xx-viewCache=false --livereload false",
     "undeploy": "cf undeploy MDGProfitCenter --delete-services --delete-service-keys --delete-service-brokers",
-    "build": "rimraf resources mta_archives && mbt build --mtar archive"
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "watch-pcapprover": "cds watch --open com.deloitte.mdg.profitcenter.approver1.pcapprover/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "cds": {
     "requires": {
@@ -59,5 +62,8 @@
     "hana": {
       "deploy-format": "hdbtable"
     }
-  }
+  },
+  "workspaces": [
+    "app/*"
+  ]
 }

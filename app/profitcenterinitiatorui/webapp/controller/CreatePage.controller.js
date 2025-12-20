@@ -213,7 +213,7 @@ sap.ui.define(
 
           //initialise data model
          
-          this.byId("dAddProfitCenter").setTitle(`Edit Profit Center`);
+          this.byId("dAddProfitCenter").setTitle(`Add Profit Center`);
 
           this._PCFragment.open();
       },
@@ -675,17 +675,19 @@ sap.ui.define(
           sap.ui.core.BusyIndicator.show();
           this.openF4Dialog("Profit Center Group", [], oEvent.getSource().getId());
 
-          let model = this.getOwnerComponent().getModel("profitCenterModel"),
-            entityset = "/I_CnsldtnSet",
-            // sProfitCenter = this.getView().getModel("oPCModel").getProperty("/profitcenter"),
-            filters = [];
+          let model = this.getOwnerComponent().getModel("profitCenterGroupModel"),
+            entityset = "/ZI_DDPROFCTRGRP",
+            sControllingArea = this.getView().getModel("oPCModel").getProperty("/controllingarea"),
+            filters = [
+              new sap.ui.model.Filter("ContArea", sap.ui.model.FilterOperator.EQ, sControllingArea)
+            ];
 
-          var sMaterialFormattedData = this.getView().getModel("profitCenterModel").getProperty("/MaterialFormattedData");
+          var sMaterialFormattedData = this.getView().getModel("profitCenterGroupModel").getProperty("/MaterialFormattedData");
           if (sMaterialFormattedData === undefined) {
             this.getF4Data(model, entityset, filters).then(data => {
               let formattedData = data?.results.map(item => ({
-                title: item.SetClass,
-                description: item.SetID_Text
+                title: item.ProfCtrGrp,
+                description: item.ProfCtrGrp
               }));
               this.getView().getModel("F4Model").setData(formattedData);
               this.openF4Dialog("Profit Center Group", formattedData, oEvent.getSource().getId());
@@ -862,7 +864,7 @@ sap.ui.define(
 
         startWorkflowInstance: function (reqID) {
           return new Promise((resolve, reject) => {
-            let definitionId = "eu10.data-guardian-development-wvrdlvx6.productionversion.productionVersionApprovalFlow";
+            let definitionId = "eu10.data-guardian-development-wvrdlvx6.profitcenter.approvalProcess";
             let commentModel = this.getView().getModel("commentModel");
             let comments = commentModel.getData();
             let initialContext = { reqno: reqID, Type: "Create", Comment: comments };
@@ -901,7 +903,7 @@ sap.ui.define(
 
             let model = this.getView().getModel("mainServiceModel");
 
-            model.update(`/ETY_WORKFLOW_HEADER('${reqID}')`, payload, {
+            model.update(`/ETY_WORKFLOW_HEADERSet('${reqID}')`, payload, {
               success: function () {
                 resolve();
               },

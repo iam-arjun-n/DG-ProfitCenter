@@ -43,7 +43,7 @@ modules:
         name: MDGProfitCenter-auth-key
   parameters:
     content:
-      instance:
+      subaccount:
         destinations:
         - Name: MDGProfitCenter_approuter_MDGProfitCenter_html_repo_host
           ServiceInstanceName: MDGProfitCenter-html5-app-host-service
@@ -71,9 +71,23 @@ modules:
       - mdgprofitcenteruiprofitcenterinitiatorui.zip
       name: mdgprofitcenteruiprofitcenterinitiatorui
       target-path: resources/
+    - artifacts:
+      - comdeloittemdgprofitcenterapprover1pcapprover.zip
+      name: comdeloittemdgprofitcenterapprover1pcapprover
+      target-path: resources/
 - name: mdgprofitcenteruiprofitcenterinitiatorui
   type: html5
   path: app/profitcenterinitiatorui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comdeloittemdgprofitcenterapprover1pcapprover
+  type: html5
+  path: app/pcapprover
   build-parameters:
     build-result: dist
     builder: custom

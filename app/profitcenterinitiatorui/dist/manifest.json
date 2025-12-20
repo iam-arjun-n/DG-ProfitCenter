@@ -39,6 +39,14 @@
                     "annotations": [],
                     "odataVersion": "2.0"
                 }
+            },
+            "profitCenterGroupService": {
+                "uri": "sap/opu/odata/ZMDG_PROFCENTER_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "2.0"
+                }
             }
         },
         "crossNavigation": {
@@ -116,6 +124,14 @@
             },
             "ZMaterialModel": {
                 "dataSource": "materialService",
+                "settings": {
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "profitCenterGroupModel": {
+                "dataSource": "profitCenterGroupService",
                 "settings": {
                     "operationMode": "Server",
                     "autoExpandSelect": true,

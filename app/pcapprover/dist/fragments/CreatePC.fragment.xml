@@ -1,0 +1,122 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="dAddProfitCenter" resizable="true" draggable="true" contentHeight="100%" contentWidth="100%" afterClose="onDialogAfterClose">
+        <content>
+            <IconTabBar id="idIconTabBar" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter id ="inputScreen" text="{i18n>createProfitCenter}" key="ProfitCenterIS" icon="sap-icon://add-contact" enabled="true">
+                        <f:SimpleForm id="createAssetForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+                            <f:content>
+                                <Label id="_IDCreatePCLabel1" text="{i18n>profitcenter}" />
+                                <Input id="profitcenter" value="{oPCModel>/profitcenter}" change="onInputValueChange" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestProfitCenter" editable="false"/>
+                                <Label id="_IDCreatePCLabel2" text="{i18n>controllingarea}" />
+                                <Input id="controllingarea" value="{oPCModel>/controllingarea}" change="onInputValueChange" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestControllingArea" editable="false" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+
+                    <IconTabFilter id ="basicDataIconFilter" text="{i18n>basicdata}" key="BasicDataSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}">
+                        <f:SimpleForm id="basicDataform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+                            <f:content>
+                                <core:Title id="_IDCreatePCTitle1" text="{i18n>descriptions}"></core:Title>
+                                <Label id="_IDCreatePCLabel3" text="{i18n>profitcenter}" />
+                                <Input id="descProfitCenter" value="{oPCModel>/profitcenter}" editable="false"/>
+                                <Label id="_IDCreatePCLabel4" text="{i18n>status}" visible="false"/>
+                                <Input id="status" visible="false" editable="false"/>
+                                <Label id="_IDCreatePCLabel5" text="{i18n>analysisperiodfrom}" />
+                                <DatePicker id="_IDCreatePCDatePicker1" valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" value="{
+                                    'path' : 'oPCModel>/analysisPeriodValidFrom',
+                                    'type' : 'sap.ui.model.type.Date',
+						            'formatOptions': {
+							                           'pattern': 'dd-MM-yyyy'
+                                                } 
+                                }" editable="false">
+                                </DatePicker>
+                                <Label id="_IDCreatePCLabel6" text="{i18n>analysisperiodto}" />
+                                <DatePicker id="_IDCreatePCDatePicker2" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd" editable="false" value="{
+                                    'path' : 'oPCModel>/analysisPeriodValidTo',
+                                    'type' : 'sap.ui.model.type.Date',
+						            'formatOptions': {
+							                           'pattern': 'dd-MM-yyyy'
+                                                } 
+                                }" >
+                                </DatePicker>
+                                <Label id="_IDCreatePCLabel7" text="{i18n>name}"></Label>
+                                <Input id="name" value="{oPCModel>/name}" required="true" maxLength="20" liveChange=".onNameChange" editable="false"></Input>
+                                <Label id="_IDCreatePCLable1" text="{i18n>longtext}"/>
+                                <Input id="longtext" value="{oPCModel>/longText}" maxLength="40" liveChange=".onNameChange" editable="false"/>
+
+                                <core:Title id="_IDCreatePCTitle2" text="Basic Data"></core:Title>
+                                <Label id="_IDCreatePCLabel8" text="{i18n>personresponsible}"/>
+                                <Input id="personresponsible" value="{oPCModel>/personresponsible}" required="true" editable="false" />
+                                <Label id="_IDCreatePCLabel9" text="{i18n>profitCentGroup}" />
+                                <Input id="profitcentergroup" value="{oPCModel>/profitCentGroup}" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestProfitCenterGroup" editable="false" />
+                                <Label id="_IDCreatePCLabel10" text="{i18n>segment}" />
+                                <Input id="segment" value="{oPCModel>/segment}" showValueHelp="true" valueHelpRequest="onValueHelpRequestSegment" editable="false" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                    <IconTabFilter id ="indicatorDataFilter" text="{i18n>indicators}" key="IndicatorSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}">
+                        <f:SimpleForm id="indicatorDataform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+                            <f:content>
+                                <core:Title id="_IDCreatePCTitle3" text="{i18n>indicators}"></core:Title>
+                                <CheckBox id="_IDCreatePCCheckBox1" text="{i18n>lockindicator}" selected="{oPCModel>/lockindicator}"></CheckBox>
+
+                                <!-- <core:Title text="Formula Planning"></core:Title> -->
+                                <Label id="_IDCreatePCLabel11" text="{i18n>formplanning}" visible="false" />
+                                <Input id="formulaplanning" value="" visible="false" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                    <IconTabFilter id ="companyCodeFilter" text="{i18n>companycodetab}" key="CompanyCodeSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}" visible="false">
+                        <Table id="_IDCreatePCTable1" items="{oCCModel>/}">
+                            <columns>
+                                <Column id="_IDCreatePCColumn1">
+                                    <Label id="_IDCreatePCLabel12" text="{i18n>companycode}"></Label>
+                                </Column>
+                                <Column id="_IDCreatePCColumn2">
+                                    <Label id="_IDCreatePCLabel13" text="{i18n>companycodename}"></Label>
+                                </Column>
+                                <Column id="_IDCreatePCColumn3">
+                                    <Label id="_IDCreatePCLabel14" text="{i18n>assigned}"></Label>
+                                </Column>
+                            </columns>
+                            <ColumnListItem id="_IDCreatePCColumnListItem1">
+                                <cells>
+                                    <Text id="_IDCreatePCText1" text="{oCCModel>CompanyCode}"></Text>
+                                    <Text id="_IDCreatePCText2" text="{oCCModel>CompanyCodeName}"></Text>
+                                    <CheckBox id="_IDCreatePCCheckBox2" selected="{oCCModel>Assigned}"></CheckBox>
+                                </cells>
+                            </ColumnListItem>
+                        </Table >
+                    </IconTabFilter>
+
+                    <IconTabFilter id ="historyFilter" text="{i18n>history}" key="HistorySelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}">
+                        <f:SimpleForm id="historyform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+                            <f:content>
+                                <Label id="_IDCreatePCLabel15" text="{i18n>createdby}" />
+                                <Input id="createdby" value="{oPCModel>/createdBy}" editable="false" />
+                                <Label id="_IDCreatePCLabel16" text="{i18n>enteredon}" />
+                                <DatePicker id="_IDCreatePCDatePicker3" value="{
+                                    'path' : 'oPCModel>/enteredOn',
+                                    'type' : 'sap.ui.model.type.Date',
+						            'formatOptions': {
+							                           'pattern': 'yyyy-MM-dd'
+                                                } 
+                                }" editable="false" >
+                                </DatePicker>
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+        <buttons>
+            <Button id="bMsgRec" icon="sap-icon://message-popup" text="{messagefrag>/messagesLength}" press="handleMessagePopoverPressFrag" visible="false"/>
+            <Button id="bSubVal" text="{i18n>validatesubmit}" press="onPageSave" type="Emphasized" visible="false"></Button>
+            <Button id="bCancel" text="{i18n>Cancel}" press="onCancelPCFragment"></Button>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

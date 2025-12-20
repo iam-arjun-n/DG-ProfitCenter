@@ -1,0 +1,110 @@
+<mvc:View controllerName="com.deloitte.mdg.profitcenter.approver1.pcapprover.controller.Approver"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <App id="app">
+        <pages>
+            <Page id="page" title="{i18n>title}" showNavButton="false" navButtonPress="onNavBack">
+                
+                <!-- Production Version Panel -->
+                <Panel
+                    id="pcDetailsPanel"
+                    headerText="Profit Center Details"
+                    expandable="true"
+                    expanded="true"
+                    class="sapUiResponsiveMargin">
+                    
+                    <!-- Table with Toolbar -->
+                    <Table
+    id="profitCenterTable"
+    inset="false"
+    noDataText="No Data available"
+    mode="SingleSelectLeft"
+    items="{pcModel>/LineItems}">
+
+
+    <headerToolbar>
+        <OverflowToolbar id="_IDGenOverflowToolbar1" width="100%">
+            <content>
+                <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                <Button id="_IDGenButton" text="Edit" icon="sap-icon://edit" press="onEdit" visible="false"/>
+                <Button id="_IDGenButton1" text="View" icon="sap-icon://display" press="onView"/>
+            </content>
+        </OverflowToolbar>
+    </headerToolbar>
+
+    <columns>
+        <Column id="_IDGenColumn"><Text id="_IDGenText" text="Profit Center"/></Column>
+        <Column id="_IDGenColumn1"><Text id="_IDGenText1" text="Controlling Area"/></Column>
+    </columns>
+
+    <items>
+        <ColumnListItem id="_IDGenColumnListItem">
+            <cells>
+                <Text id="_IDGenText5" text="{pcModel>profitcenter}"/>
+                <Text id="_IDGenText6" text="{pcModel>controllingarea}"/>
+            </cells>
+        </ColumnListItem>
+    </items>
+
+</Table>
+
+                </Panel>
+
+                <!-- Comments Panel -->
+                <!-- <Panel
+                    id="pnlComments"
+                    headerText="Comments"
+                    expandable="true"
+                    expanded="true"
+                    class="sapUiResponsiveMargin">
+                    
+                    <content>
+                        <FeedInput
+                            id="fIC"
+                            post="onCommentPost"
+                            class="sapUiSmallMarginTopBottom"
+                            maxLength="100"
+                            placeholder="Add a comment - Character length limited to 100"
+                            icon="sap-icon://comment"
+                            rows="1"/>
+                        
+                        <List
+                            id="flist"
+                            items="{commentModel>/}"
+                            showSeparators="Inner">
+                            <FeedListItem id="_IDGenFeedListItem"
+                                sender="{commentModel>UserName}"
+                                timestamp="{commentModel>Date}"
+                                text="{commentModel>Text}"/>
+                        </List>
+                    </content>
+                </Panel> -->
+
+<Panel id="pnlComments" expanded="true" expandable="true" headerText="Comments" width="auto" class="sapUiResponsiveMargin">
+                <content>
+                    <FeedInput id="fIC" post="onPostComment" class="sapUiSmallMarginTopBottom" maxLength="100" placeholder="Add a comment - Character length limited to 100" icon="sap-icon://comment" rows="1"/>
+                    <List showSeparators="Inner" items="{commentModel>/}" id="flist">
+                        <FeedListItem id="fliComment" sender="{commentModel>Username}" showIcon="true"
+    icon="sap-icon://person-placeholder" timestamp="{commentModel>Date}" text="{commentModel>Comment}"/>
+                    </List>
+                </content>
+            </Panel>
+                <!-- Footer Buttons -->
+                <footer>
+                    <OverflowToolbar id="_IDGenOverflowToolbar2">
+                        <Button
+                            id="btnMessage"
+                            icon="sap-icon://message-popup"/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                        <Button id="_IDGenButton2"
+                            text="Send for Approval"
+                            type="Accept"
+                            icon="sap-icon://paper-plane"
+                            press="initiateApprovalProcess"/>
+                    </OverflowToolbar>
+                </footer>
+
+            </Page>
+        </pages>
+    </App>
+</mvc:View>
