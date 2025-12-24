@@ -70,7 +70,7 @@
                             </f:content>
                         </f:SimpleForm>
                     </IconTabFilter>
-                    <IconTabFilter id ="companyCodeFilter" text="{i18n>companycodetab}" key="CompanyCodeSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}" visible="false">
+                    <IconTabFilter id ="companyCodeFilter" text="{i18n>companycodetab}" key="CompanyCodeSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}" visible="true">
                         <Table id="_IDCreatePCTable1" items="{oCCModel>/}">
                             <columns>
                                 <Column id="_IDCreatePCColumn1">

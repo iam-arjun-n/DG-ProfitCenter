@@ -8,18 +8,26 @@
       "service": "sap-approuter-userapi"
     },
     {
+      "source": "^/bpmworkflowruntime/v1/(.*)$",
+      "target": "/public/workflow/rest/v1/$1",
+      "service": "com.sap.spa.processautomation",
+      "endpoint": "api",
+      "authenticationType": "xsuaa"
+    },
+    {
       "source": "^/bpmworkflowruntime/v2/(.*)$",
       "target": "/public/rule/runtime/rest/v2/$1",
       "destination": "BPA",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },
+   
     {
-      "source": "^/bpmworkflowruntime/(.*)$",
-      "target": "/public/workflow/rest/$1",
+      "source": "^/workflow/(.*)$",
+      "target": "/workflow/$1",
       "destination": "BPA",
-      "authenticationType": "xsuaa",
-      "csrfProtection": false
+      "csrfProtection": false,
+      "authenticationType": "xsuaa"
     },
     {
       "source": "^/api/(.*)$",

@@ -14,6 +14,7 @@ type Status       : String enum {
     Error;
     Rejected;
     Rework;
+    Completed;
     ![In Progress];
 }
 @assert.range
@@ -50,6 +51,8 @@ entity ETY_WORKFLOW_HEADER:cuid {
         LastModifiedOn       : Timestamp
         @cds.on.insert  : $now
         @cds.on.update  : $now;
+        ApprovedBy           : String(50);
+        ApprovedOn           :Timestamp;
         LastModifiedBy       : String(242);
         NAV_WORKFLOW_ITEMSET : Composition of many ETY_WORKFLOW_ITEM
                                    on NAV_WORKFLOW_ITEMSET.NAV_WORKFLOW_HEADER = $self;
@@ -80,10 +83,18 @@ entity ETY_WORKFLOW_ITEM : cuid, managed {
         profitCentGroup         : String(12) @title: 'Profit Cent Group';
         segment                 : String(10) @title: 'Segment';
         //company codes
-        companycode             : String(4)  @title: 'Company Code';
-        companyname             : String(25) @title: 'Company Name';
-        assigned                : Boolean    @title: 'Assigned';
+        // companycode             : String(4)  @title: 'Company Code';
+        // companyname             : String(25) @title: 'Company Name';
+        // assigned                : Boolean    @title: 'Assigned';
         //indicators
         lockIndicator           : Boolean    @title: 'Lock Indicator';
+        NAV_WORKFLOW_COMPANYCODE : Composition of many ETY_CompanyCode on NAV_WORKFLOW_COMPANYCODE.NAV_WORKFLOW_ITEMSET=$self;
 
+}
+
+entity ETY_CompanyCode: cuid,managed{
+    key NAV_WORKFLOW_ITEMSET: Association to one ETY_WORKFLOW_ITEM;
+        companycode : String(10);
+        companyname : String(100);
+        assigned : Boolean
 }

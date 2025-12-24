@@ -26,19 +26,21 @@
                                 <Label id="_IDCreatePCLabel4" text="{i18n>status}" visible="false"/>
                                 <Input id="status" visible="false" editable="false"/>
                                 <Label id="_IDCreatePCLabel5" text="{i18n>analysisperiodfrom}" />
-                                <DatePicker id="_IDCreatePCDatePicker1" valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" value="{
+                                <DatePicker id="_IDCreatePCDatePicker1" valueFormat="dd-MM-yyyy" displayFormat="dd-MM-yyyy" value="{
                                     'path' : 'oPCModel>/analysisPeriodValidFrom',
                                     'type' : 'sap.ui.model.type.Date',
 						            'formatOptions': {
+                                                        source: { pattern: 'dd-MM-yyyy' },
 							                           'pattern': 'dd-MM-yyyy'
                                                 } 
                                 }" editable="false">
                                 </DatePicker>
                                 <Label id="_IDCreatePCLabel6" text="{i18n>analysisperiodto}" />
-                                <DatePicker id="_IDCreatePCDatePicker2" displayFormat="dd-MM-yyyy" valueFormat="yyyy-MM-dd" editable="false" value="{
+                                <DatePicker id="_IDCreatePCDatePicker2" displayFormat="dd-MM-yyyy" valueFormat="dd-MM-yyyy" editable="false" value="{
                                     'path' : 'oPCModel>/analysisPeriodValidTo',
                                     'type' : 'sap.ui.model.type.Date',
 						            'formatOptions': {
+                                                        source: { pattern: 'dd-MM-yyyy' },
 							                           'pattern': 'dd-MM-yyyy'
                                                 } 
                                 }" >
@@ -62,7 +64,7 @@
                         <f:SimpleForm id="indicatorDataform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
                             <f:content>
                                 <core:Title id="_IDCreatePCTitle3" text="{i18n>indicators}"></core:Title>
-                                <CheckBox id="_IDCreatePCCheckBox1" text="{i18n>lockindicator}" selected="{oPCModel>/lockindicator}"></CheckBox>
+                                <CheckBox id="_IDCreatePCCheckBox1" text="{i18n>lockindicator}" selected="{oPCModel>/lockindicator}" editable="false" ></CheckBox>
 
                                 <!-- <core:Title text="Formula Planning"></core:Title> -->
                                 <Label id="_IDCreatePCLabel11" text="{i18n>formplanning}" visible="false" />
@@ -70,7 +72,7 @@
                             </f:content>
                         </f:SimpleForm>
                     </IconTabFilter>
-                    <IconTabFilter id ="companyCodeFilter" text="{i18n>companycodetab}" key="CompanyCodeSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}" visible="false">
+                    <IconTabFilter id ="companyCodeFilter" text="{i18n>companycodetab}" key="CompanyCodeSelection" icon="sap-icon://add-contact" enabled="{oPCModel>/enableTabs}" visible="true">
                         <Table id="_IDCreatePCTable1" items="{oCCModel>/}">
                             <columns>
                                 <Column id="_IDCreatePCColumn1">
@@ -87,7 +89,7 @@
                                 <cells>
                                     <Text id="_IDCreatePCText1" text="{oCCModel>CompanyCode}"></Text>
                                     <Text id="_IDCreatePCText2" text="{oCCModel>CompanyCodeName}"></Text>
-                                    <CheckBox id="_IDCreatePCCheckBox2" selected="{oCCModel>Assigned}"></CheckBox>
+                                    <CheckBox id="_IDCreatePCCheckBox2" selected="{oCCModel>Assigned}" editable="false"></CheckBox>
                                 </cells>
                             </ColumnListItem>
                         </Table >

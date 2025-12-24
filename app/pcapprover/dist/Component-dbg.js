@@ -4,7 +4,7 @@ sap.ui.define([
     "com/deloitte/mdg/profitcenter/approver1/pcapprover/model/models"
 ], (UIComponent,JSONModel, models) => {
     "use strict";
-
+    var that;
     return UIComponent.extend("com.deloitte.mdg.profitcenter.approver1.pcapprover.Component", {
         metadata: {
             manifest: "json",
@@ -13,7 +13,8 @@ sap.ui.define([
             ]
         },
 
-        init() {
+        init:async function() {
+            that=this;
             // call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
 
@@ -26,6 +27,18 @@ sap.ui.define([
                 var oComments = new JSONModel();
         oComments.setData([]);
         this.setModel(oComments, "commentModel");
+        let userId = "DEFAULT_USER";
+
+                if (sap.ushell?.Container?.getUser) {
+                    userId = sap.ushell.Container.getUser().getEmail();
+                }
+
+                let userModel = new JSONModel({
+                    currentUser: userId
+                });
+
+                this.setModel(userModel, "userModel");
+
 
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
@@ -65,7 +78,9 @@ sap.ui.define([
                         type: "NEGATIVE"
                     }, function () {
                         return oContent.getController().onReject();
-                    });
+                    },
+                this
+            );
                 }
 
                 return oContent;

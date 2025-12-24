@@ -109,6 +109,8 @@
                     <!-- <Column><Text text="{i18n>typ}"/></Column> -->
                     <Column id="_IDGenColumn33"><Text id="_IDGenText14" text="Created By"/></Column>
                     <Column id="_IDGenColumn34"><Text id="_IDGenText15" text="Created On"/></Column>
+                    <Column ><Text text="Approved By"></Text></Column>
+                    <Column ><Text text="Approved On"></Text></Column>
                 </columns>
                 
                 <items>
@@ -120,6 +122,8 @@
                             <!-- <Text text="{mainServiceModel>Type}"/> -->
                             <Text id="_IDGenText17" text="{mainServiceModel>CreatedBy}"/>
                             <Text id="_IDGenText18" text="{mainServiceModel>CreatedOn}"/>
+                            <Text text="{mainServiceModel>ApprovedBy}"></Text>
+                            <Text text="{mainServiceModel>ApprovedOn}"></Text>
                         </cells>
                     </ColumnListItem>
                 </items>

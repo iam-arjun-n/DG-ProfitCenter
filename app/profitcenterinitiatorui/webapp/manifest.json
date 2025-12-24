@@ -41,7 +41,7 @@
         }
       },
       "profitCenterGroupService":{
-        "uri": "/sap/opu/odata/ZMDG_PROFCENTER_SRV",
+        "uri": "/sap/opu/odata/sap/ZMDG_PROFCENTER_SRV",
         "type": "OData",
         "settings": {
           "annotations": [],
