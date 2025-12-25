@@ -635,38 +635,85 @@ sap.ui.define(
 
           /** download excel template function */
 
+          // onPressDownloadTemplate: function () {
+          //   let excelWorkBookData = this.getView()
+          //     .getModel("ExcelTmpModel")
+          //     .getData();
+          //   const Workbook = XLSX.utils.book_new();
+          //   excelWorkBookData.forEach((sheet) => {
+          //     if (sheet.data.length > 0) {
+          //       const sheetData = XLSX.utils.aoa_to_sheet([
+          //         Object.keys(sheet.data[0]),
+          //         ...sheet.data.map(Object.values),
+          //       ]);
+          //       XLSX.utils.book_append_sheet(Workbook, sheetData, sheet.Name);
+          //     }
+          //   });
+
+          //   // Convert the workbook to binary format
+          //   const excelBinary = XLSX.write(Workbook, { type: "binary" });
+
+          //   // Trigger the download
+          //   const blob = new Blob([this.s2ab(excelBinary)], {
+          //     type: "application/octet-stream",
+          //   });
+          //   saveAs(blob, "assetmaster_template.xlsx"); // <-- Use saveAs from FileSaver.js
+          // },
+
+          // s2ab: function (s) {
+          //   const buf = new ArrayBuffer(s.length);
+          //   const view = new Uint8Array(buf);
+          //   for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+          //   return buf;
+          // },
+
           onPressDownloadTemplate: function () {
-            let excelWorkBookData = this.getView()
-              .getModel("ExcelTmpModel")
-              .getData();
-            const Workbook = XLSX.utils.book_new();
-            excelWorkBookData.forEach((sheet) => {
-              if (sheet.data.length > 0) {
-                const sheetData = XLSX.utils.aoa_to_sheet([
-                  Object.keys(sheet.data[0]),
-                  ...sheet.data.map(Object.values),
-                ]);
-                XLSX.utils.book_append_sheet(Workbook, sheetData, sheet.Name);
-              }
-            });
+    const oModel = this.getView().getModel("mainServiceModel");
 
-            // Convert the workbook to binary format
-            const excelBinary = XLSX.write(Workbook, { type: "binary" });
+    oModel.callFunction("/downloadTemplate", {
+        method: "POST",
 
-            // Trigger the download
-            const blob = new Blob([this.s2ab(excelBinary)], {
-              type: "application/octet-stream",
-            });
-            saveAs(blob, "assetmaster_template.xlsx"); // <-- Use saveAs from FileSaver.js
-          },
+        success: function (oData) {
 
-          s2ab: function (s) {
-            const buf = new ArrayBuffer(s.length);
-            const view = new Uint8Array(buf);
-            for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
-            return buf;
-          },
+            let base64 = oData.downloadTemplate;
 
+            // 🔑 FIX: Convert URL-safe base64 to standard base64
+            base64 = base64
+                .replace(/-/g, "+")
+                .replace(/_/g, "/");
+
+            // Pad if required
+            while (base64.length % 4 !== 0) {
+                base64 += "=";
+            }
+
+            const binary = atob(base64);
+
+            const len = binary.length;
+            const bytes = new Uint8Array(len);
+
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+
+            const blob = new Blob(
+                [bytes],
+                { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }
+            );
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Profit Center Mass Upload Template.xlsx";
+            a.click();
+            URL.revokeObjectURL(url);
+        },
+
+        error: function () {
+            sap.m.MessageToast.show("Download failed");
+        }
+    });
+},
           onValueHelpRequestProfitCenter: function (oEvent) {
             sap.ui.core.BusyIndicator.show();
             this.openF4Dialog("Profit Center", [], oEvent.getSource().getId());

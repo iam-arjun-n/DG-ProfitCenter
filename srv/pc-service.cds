@@ -5,6 +5,8 @@ using {ZDEMP_BTP_SRV as external} from './external/ZDEMP_BTP_SRV';
 service ProfitCenterService {
     entity ETY_WORKFLOW_HEADERSet as projection on profit.ETY_WORKFLOW_HEADER;
     entity ETY_WORKFLOW_ITEMSet   as projection on profit.ETY_WORKFLOW_ITEM;
+    action downloadTemplate() returns cds.LargeBinary;
+
 
     //external service for VH
     entity CompanyCodeVH          as
