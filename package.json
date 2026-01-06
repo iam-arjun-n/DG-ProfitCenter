@@ -13,7 +13,8 @@
     "@sap/cds-hana": "^2.1.0",
     "@sap/hana-client": "^2.21.28",
     "@sap/xssec": "^3",
-    "express": "^4"
+    "express": "^4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1.11.1",
@@ -21,10 +22,10 @@
     "@sap/eslint-plugin-cds": "^3",
     "@sap/hdi-deploy": "4.9.5",
     "@sap/ux-specification": "^1.120.14",
-    "eslint": "^9",
-    "rimraf": "^5.0.5",
     "cds-plugin-ui5": "^0.13.0",
-    "mbt": "^1.2.29"
+    "eslint": "^9",
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5"
   },
   "scripts": {
     "start": "cds-serve",

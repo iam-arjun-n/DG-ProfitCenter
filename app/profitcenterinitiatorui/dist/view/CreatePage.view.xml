@@ -1,7 +1,8 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="mdg.profitcenter.ui.profitcenterinitiatorui.controller.CreatePage" displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:l="sap.ui.layout">
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified">
     <Page id="pProvisionCreate" floatingFooter="true" showNavButton="true" navButtonPress="navButtonPressFunction">
         <content>
             <Panel id="custPanel" expanded="true" expandable="true" width="auto" class="sapUiResponsiveMargin" headerText="{i18n>headerdata}">
@@ -12,9 +13,9 @@
                                 <content>
                                     <OverflowToolbar id="_IDCreatePageOverflowToolbar1" width="100%">
                                         <content>
-                                            <!-- <sap.ui.unified:FileUploader xmlns:sap.ui.unified="sap.ui.unified" id="fileUploader" change="fileChange"/> -->
-                                            <!-- <Button text="Upload" id="bUpd" icon="sap-icon://upload" press="uploadFile" enabled="false"/> -->
-                                            <Button id="_IDButtonDownloadTemplate" text="{i18n>downloadtemplate}" press="onPressDownloadTemplate"/>
+                                            <unified:FileUploader  buttonText="Upload" buttonOnly="true" style="Emphasized" icon="sap-icon://upload" id="fileUploader" change="onFileChange"/>
+                                            <!-- <Button text="Upload" id="bUpd" icon="sap-icon://upload" press="uploadFile" type="Emphasized" enabled="false" /> -->
+                                            <Button id="_IDButtonDownloadTemplate" icon="sap-icon://download" text="{i18n>downloadtemplate}" press="onPressDownloadTemplate"/>
                                             <ToolbarSpacer id="_IDCreatePageToolbarSpacer1"/>
                                             <Button text="{i18n>Edit}" id="bEdit" icon="sap-icon://edit" press="editProfitCenterClassObj" enabled="false"/>
                                             <!-- <Button text="Extend" id="bExtend" icon="sap-icon://add-activity-2" press="editCustomerobj" enabled="false" visible="false"/>                                             -->
