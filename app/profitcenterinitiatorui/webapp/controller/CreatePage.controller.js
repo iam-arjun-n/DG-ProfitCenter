@@ -82,8 +82,8 @@ sap.ui.define(
           this.getView().setModel(pcModel, "pcModel");
 
           var oModel = new sap.ui.model.json.JSONModel();
-           oModel.setData({});
-           this.getView().setModel(oModel, "oPCModel");
+          oModel.setData({});
+          this.getView().setModel(oModel, "oPCModel");
           //Download Excel Template
 
           let downloadExcelModel = new JSONModel(
@@ -248,26 +248,26 @@ sap.ui.define(
 
           var oLocalModel = this.getView().getModel("oPCModel");
           // if (oLocalModel) {
-            var oEditData = JSON.parse(JSON.stringify(oSelectedRow));
-            oLocalModel.setData(oEditData);
+          var oEditData = JSON.parse(JSON.stringify(oSelectedRow));
+          oLocalModel.setData(oEditData);
           // }
 
           var oCCModel = this.getView().getModel("oCCModel");
           oCCModel.setData(oSelectedRow.companyCode);
           let oView = this.getView();
           if (!this._PCFragment) {
-        Fragment.load({
-            id: oView.getId(),
-            name: "mdg.profitcenter.ui.profitcenterinitiatorui.fragments.CreatePC",
-            controller: this,
-        }).then(function(oFragment) {
-            this._PCFragment = oFragment;
-            oView.addDependent(this._PCFragment);
+            Fragment.load({
+              id: oView.getId(),
+              name: "mdg.profitcenter.ui.profitcenterinitiatorui.fragments.CreatePC",
+              controller: this,
+            }).then(function (oFragment) {
+              this._PCFragment = oFragment;
+              oView.addDependent(this._PCFragment);
+              this._PCFragment.open();
+            }.bind(this));
+          } else {
             this._PCFragment.open();
-        }.bind(this));
-    } else {
-        this._PCFragment.open();
-    }
+          }
 
 
 
@@ -748,16 +748,17 @@ sap.ui.define(
           reader.readAsArrayBuffer(file);
         },
 
-        _processExcelData: function (aRows) {
+        _processExcelData: async function (aRows) {
           const aValidData = [];
           const aErrors = [];
 
-          aRows.forEach((row, index) => {
-            const rowNo = index + 2; // Excel row number
+          for (let index = 0; index < aRows.length; index++) {
+            const row = aRows[index];
+            const rowNo = index + 2;
 
-            // ✅ FIRST LINE: process ONLY rows with Profit Center
+            // Skip empty Profit Center rows
             if (!row["Profit Center "] || row["Profit Center "].toString().trim() === "") {
-              return; // skip this row only
+              continue;
             }
 
             const errors = [];
@@ -795,10 +796,13 @@ sap.ui.define(
                 row: rowNo,
                 messages: errors
               });
-            } else {
-              aValidData.push(this._mapExcelRow(row));
+              continue;
             }
-          });
+
+            // ✅ await works correctly in for-loop
+            const mappedRow = await this._mapExcelRow(row);
+            aValidData.push(mappedRow);
+          }
 
           if (aErrors.length) {
             this._showExcelErrors(aErrors);
@@ -809,45 +813,86 @@ sap.ui.define(
         },
 
         _formatDateToDDMMYYYY: function (sDate) {
-    if (!sDate) {
-        return "";
-    }
+          if (!sDate) {
+            return "";
+          }
 
-    const aParts = sDate.split("-");
-    if (aParts.length !== 3) {
-        return sDate;
-    }
+          const aParts = sDate.split("-");
+          if (aParts.length !== 3) {
+            return sDate;
+          }
 
-    return `${aParts[2]}-${aParts[1]}-${aParts[0]}`;
-},
+          return `${aParts[2]}-${aParts[1]}-${aParts[0]}`;
+        },
 
 
-       _isValidDate: function (sDate) {
-    if (!sDate || typeof sDate !== "string") {
-        return false;
-    }
+        _isValidDate: function (sDate) {
+          if (!sDate || typeof sDate !== "string") {
+            return false;
+          }
 
-    // Expecting yyyy-MM-dd
-    const match = sDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if (!match) {
-        return false;
-    }
+          // Expecting yyyy-MM-dd
+          const match = sDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+          if (!match) {
+            return false;
+          }
 
-    const year = Number(match[1]);
-    const month = Number(match[2]);
-    const day = Number(match[3]);
+          const year = Number(match[1]);
+          const month = Number(match[2]);
+          const day = Number(match[3]);
 
-    // Month range
-    if (month < 1 || month > 12) {
-        return false;
-    }
+          // Month range
+          if (month < 1 || month > 12) {
+            return false;
+          }
 
-    // Day range
-    const maxDays = new Date(year, month, 0).getDate();
-    return day >= 1 && day <= maxDays;
-},
+          // Day range
+          const maxDays = new Date(year, month, 0).getDate();
+          return day >= 1 && day <= maxDays;
+        },
 
-        _mapExcelRow: function (row) {
+        _mapExcelRow: async function (row) {
+          const oODataModel = this.getOwnerComponent()
+            .getModel("ZMaterialModel");
+
+          // SAP logon language (EN, DE, etc.)
+          const sLanguage = 'EN';
+
+          const aFilters = [
+            new sap.ui.model.Filter("ControllingArea", sap.ui.model.FilterOperator.EQ, row["Controlling Area"]),
+            new sap.ui.model.Filter("Language", sap.ui.model.FilterOperator.EQ, 'EN')
+          ];
+
+          // oODataModel.read("/I_CompanyCode", {
+          //   filters: aFilters,
+          //   success: (oData) => {
+          //     // Bind ALL returned company codes
+          //     companyCode=oData.results || [];
+          //   },
+          //   error: () => {
+
+          //   }
+          // });
+
+          const companyCode = await new Promise((resolve, reject) => {
+            oODataModel.read("/I_CompanyCode", {
+              filters: aFilters,
+              success: (oData) => resolve(oData.results || []),
+              error: reject
+            });
+          });
+
+           // 2️⃣ Company codes assigned in Excel
+  const aAssignedCodes = (row["Company Codes Assigned"] || "")
+    .split(",")
+    .map(c => c.trim());
+
+  // 3️⃣ Mark assigned = true/false
+  const aCompanyCodeWithFlag = companyCode.map(cc => ({
+    ...cc,
+    Assigned: aAssignedCodes.includes(cc.CompanyCode)
+  }));
+
           return {
             profitcenter: row["Profit Center "],
             controllingarea: row["Controlling Area"],
@@ -858,8 +903,8 @@ sap.ui.define(
             lockindicator: row["Lock Indicator"] === "TRUE" || TRUE ? true : false,
             personresponsible: row["Person Responsible"],
             profitCentGroup: row["Profit Center Group"],
-            segment: row["Segment"]
-            // assigned: false
+            segment: row["Segment"],
+            companyCode: aCompanyCodeWithFlag
           };
         },
 

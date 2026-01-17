@@ -38,11 +38,11 @@
                                     <Select xmlns="sap.m" id="rStat" forceSelection="false">
                                         <items>
                                             <core:Item id="_IDGenItem233"
-                                                xmlns:core="sap.ui.core" key="A" text="Approved"/>
+                                                xmlns:core="sap.ui.core" key="In Progress" text="In Progress"/>
                                             <core:Item id="_IDGenItem333"
-                                                xmlns:core="sap.ui.core" key="C" text="Completed"/>
+                                                xmlns:core="sap.ui.core" key="Completed" text="Completed"/>
                                             <core:Item id="_IDGenItem4"
-                                                xmlns:core="sap.ui.core" key="R" text="Rejected"/>
+                                                xmlns:core="sap.ui.core" key="Rejected" text="Rejected"/>
                                         </items>
                                     </Select>
                                 </fb:control>
