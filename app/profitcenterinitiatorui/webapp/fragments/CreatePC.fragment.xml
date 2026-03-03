@@ -10,7 +10,7 @@
                         <f:SimpleForm id="createAssetForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="3" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
                             <f:content>
                                 <Label id="_IDCreatePCLabel1" text="{i18n>profitcenter}" />
-                                <Input id="profitcenter" value="{oPCModel>/profitcenter}" change="onInputValueChange" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestProfitCenter"/>
+                                <Input id="profitcenter" value="{oPCModel>/profitcenter}" change="onInputValueChange" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestProfitCenter" liveChange="onLiveValidateProfitCenter"/>
                                 <Label id="_IDCreatePCLabel2" text="{i18n>controllingarea}" />
                                 <Input id="controllingarea" value="{oPCModel>/controllingarea}" change="onInputValueChange" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestControllingArea" />
                             </f:content>
@@ -44,17 +44,17 @@
                                 }">
                                 </DatePicker>
                                 <Label id="_IDCreatePCLabel7" text="{i18n>name}"></Label>
-                                <Input id="name" value="{oPCModel>/name}" required="true" maxLength="20" liveChange=".onNameChange"></Input>
+                                <Input id="name" value="{oPCModel>/name}" required="true" maxLength="20"  liveChange="onLiveValidateName" ></Input>
                                 <Label id="_IDCreatePCLable1" text="{i18n>longtext}"/>
-                                <Input id="longtext" value="{oPCModel>/longText}" maxLength="40" liveChange=".onNameChange"/>
+                                <Input id="longtext" value="{oPCModel>/longText}" maxLength="40" liveChange="onLiveValidateLongText"/>
 
                                 <core:Title id="_IDCreatePCTitle2" text="Basic Data"></core:Title>
                                 <Label id="_IDCreatePCLabel8" text="{i18n>personresponsible}"/>
-                                <Input id="personresponsible" value="{oPCModel>/personresponsible}" required="true" />
+                                <Input id="personresponsible" value="{oPCModel>/personresponsible}" required="true" liveChange="onLiveValidatePerson"/>
                                 <Label id="_IDCreatePCLabel9" text="{i18n>profitCentGroup}" />
-                                <Input id="profitcentergroup" value="{oPCModel>/profitCentGroup}" required="true" showValueHelp="true" valueHelpRequest="onValueHelpRequestProfitCenterGroup" />
+                                <Input id="profitcentergroup" value="{oPCModel>/profitCentGroup}" required="true" liveChange="onLiveValidatePCGroup" showValueHelp="true" valueHelpRequest="onValueHelpRequestProfitCenterGroup" />
                                 <Label id="_IDCreatePCLabel10" text="{i18n>segment}" />
-                                <Input id="segment" value="{oPCModel>/segment}" showValueHelp="true" valueHelpRequest="onValueHelpRequestSegment"/>
+                                <Input id="segment" value="{oPCModel>/segment}" showValueHelp="true" liveChange="onLiveValidateSegment" valueHelpRequest="onValueHelpRequestSegment"/>
                             </f:content>
                         </f:SimpleForm>
                     </IconTabFilter>

@@ -435,123 +435,273 @@ sap.ui.define(
         },
 
         onPageSave: function () {
-          const oPCModel = this.getView().getModel("pcModel");
 
-          if (!oPCModel) {
-            console.error("pcModel is not defined");
+          const oPCModel = this.getView().getModel("pcModel");
+          const oLocalModel = this.getView().getModel("oPCModel");
+          const aCompanyCodes = this.getView().getModel("oCCModel").getData() || [];
+
+          if (!oPCModel || !oLocalModel) {
+            console.error("Model missing");
             return;
           }
 
-          // Clear old validation messages
+          /* =====================================
+             CLEAR OLD MESSAGES
+          ====================================== */
           this.oMessageManager.removeAllMessages();
 
-          // Field refs
-          const oProfitCenter = this.byId("profitcenter");
-          const oControllingArea = this.byId("controllingarea");
-          const oName = this.byId("name");
-          const oPersonResp = this.byId("personresponsible");
-          const oPCGroup = this.byId("profitcentergroup");
-          const aCompanyCodes = this.getView().getModel("oCCModel").getData() || [];
+          let hasError = false;
 
-          // Check if at least one company code is assigned
-          const bAnyAssigned = aCompanyCodes.some(cc => cc.Assigned === true);
-
-
-          let bIsValid = true;
-
-          // Helper function for validation
-          const validateField = (oField, sFieldName) => {
-            if (!oField.getValue().trim()) {
-              bIsValid = false;
-
-              this.oMessageManager.addMessages(
-                new sap.ui.core.message.Message({
-                  message: `${sFieldName} is mandatory`,
-                  type: sap.ui.core.MessageType.Error,
-                  target: oField.getId(),
-                  processor: oPCModel
-                })
-              );
-            }
-          };
-
-          // Mandatory field validations
-          // validateField(oProfitCenter, "Profit Center");
-          // validateField(oControllingArea, "Controlling Area");
-          // validateField(oName, "Name");
-          // validateField(oPersonResp, "Person Responsible");
-          // validateField(oPCGroup, "Profit Center Group");
-
-          // If validation failed → show popover
-          // if (!bIsValid) {
-          this.byId("bMsgRec").firePress();  // Auto open popover
-          let valid = true;
-
-          valid &= this.validateRequired(this.byId("profitcenter"), "Profit Center is required");
-          valid &= this.validateRequired(this.byId("controllingarea"), "Controlling Area is required");
-          valid &= this.validateRequired(this.byId("name"), "Name is required");
-          valid &= this.validateRequired(this.byId("personresponsible"), "Person Responsible is required");
-          valid &= this.validateRequired(this.byId("profitcentergroup"), "Profit Center Group is required");
-
-          if (!bAnyAssigned) {
-            bIsValid = true;
-            valid = false;
+          const addError = (msg, target) => {
+            hasError = true;
             this.oMessageManager.addMessages(
               new sap.ui.core.message.Message({
-                message: "At least one Company Code must be assigned",
+                message: msg,
                 type: sap.ui.core.MessageType.Error,
-                target: "/CompanyCode", // logical target
+                target: target || "",
                 processor: this.oControlMessageProcessor
               })
             );
-
-          }
-
-          if (!valid) {
-            // Auto-open message popover or show toast
-            MessageToast.show("Please correct the errors.");
-            return; // stop save
           };
 
+          /* =====================================
+             FIELD REFERENCES
+          ====================================== */
 
-          // If valid → proceed with save
+          const oProfitCenter = this.byId("profitcenter");
+          const oControllingArea = this.byId("controllingarea");
+          const oName = this.byId("name");
+          const oLongText = this.byId("longtext");
+          const oPersonResp = this.byId("personresponsible");
+          const oPCGroup = this.byId("profitcentergroup");
+          const oSegment = this.byId("segment");
+
+          const fromDate = oLocalModel.getProperty("/analysisPeriodValidFrom");
+          const toDate = oLocalModel.getProperty("/analysisPeriodValidTo");
+
+          const bAnyAssigned = aCompanyCodes.some(cc => cc.Assigned === true);
+
+          /* =====================================
+             RE-RUN FORMAT VALIDATION
+             (Ensures Save never trusts UI state)
+          ====================================== */
+
+          const revalidate = (oInput, type) => {
+            this._validateField(oInput, type);
+            const valueState = oInput.getValueState();
+            if (valueState === "Error") {
+              hasError = true;
+            }
+          };
+
+          revalidate(oProfitCenter, "PROFIT_CENTER");
+          revalidate(oControllingArea, "CONTROLLING_AREA");
+          revalidate(oName, "NAME");
+          revalidate(oLongText, "LONG_TEXT");
+          revalidate(oPersonResp, "PERSON_RESP");
+          revalidate(oPCGroup, "PC_GROUP");
+          revalidate(oSegment, "SEGMENT");
+
+          /* =====================================
+             MANDATORY VALIDATION (ONLY HERE)
+          ====================================== */
+
+          if (!oProfitCenter.getValue().trim())
+            addError("Profit Center is mandatory", oProfitCenter.getId() + "/value");
+
+          if (!oControllingArea.getValue().trim())
+            addError("Controlling Area is mandatory", oControllingArea.getId() + "/value");
+
+          if (!oName.getValue().trim())
+            addError("Name is mandatory", oName.getId() + "/value");
+
+          if (!oPersonResp.getValue().trim())
+            addError("Person Responsible is mandatory", oPersonResp.getId() + "/value");
+
+          if (!oPCGroup.getValue().trim())
+            addError("Profit Center Group is mandatory", oPCGroup.getId() + "/value");
+
+          if (!fromDate)
+            addError("Analysis Period From is mandatory");
+
+          if (!toDate)
+            addError("Analysis Period To is mandatory");
+
+          /* =====================================
+             DATE LOGIC
+          ====================================== */
+
+          if (fromDate && toDate && new Date(fromDate) > new Date(toDate)) {
+            addError("Analysis Period From must be ≤ Analysis Period To");
+          }
+
+          const maxDate = new Date("9999-12-31");
+          if (toDate && new Date(toDate) > maxDate) {
+            addError("Analysis Period To cannot exceed 31.12.9999");
+          }
+
+          /* =====================================
+             COMPANY CODE VALIDATION
+          ====================================== */
+
+          if (!bAnyAssigned) {
+            addError("At least one Company Code must be assigned");
+          }
+
+          /* =====================================
+             STOP IF ERROR
+          ====================================== */
+
+          if (hasError) {
+            this.byId("bMsgRec").firePress();   // open popover
+            return;
+          }
+
+          /* =====================================
+             SAVE LOGIC
+          ====================================== */
+
           let aLineItems = oPCModel.getProperty("/LineItems") || [];
-          // const aCompanyCodes =this.getView().getModel("oCCModel").getData();
-
 
           let oSelectedItem = {
-            profitcenter: oProfitCenter.getValue(),
-            controllingarea: oControllingArea.getValue(),
-            analysisPeriodValidFrom: this.byId("_IDCreatePCDatePicker1").getValue(),
-            analysisPeriodValidTo: this.byId("_IDCreatePCDatePicker2").getValue(),
-            name: oName.getValue(),
-            longText: this.byId("longtext").getValue(),
-            personresponsible: oPersonResp.getValue(),
-            profitCentGroup: oPCGroup.getValue(),
-            segment: this.byId("segment").getValue(),
-            lockindicator: this.byId("_IDCreatePCCheckBox1").getSelected(),
-            createdBy: this.byId("createdby").getValue(),
-            enteredOn: this.byId("_IDCreatePCDatePicker3").getValue(),
+            profitcenter: oProfitCenter.getValue().trim(),
+            controllingarea: oControllingArea.getValue().trim(),
+            analysisPeriodValidFrom: fromDate,
+            analysisPeriodValidTo: toDate,
+            name: oName.getValue().trim(),
+            longText: oLongText.getValue().trim(),
+            personresponsible: oPersonResp.getValue().trim(),
+            profitCentGroup: oPCGroup.getValue().trim(),
+            segment: oSegment.getValue().trim(),
+            lockindicator: oLocalModel.getProperty("/lockindicator"),
+            createdBy: oLocalModel.getProperty("/createdBy"),
+            enteredOn: oLocalModel.getProperty("/enteredOn"),
             companyCode: aCompanyCodes
           };
 
           if (this._isEditMode) {
             aLineItems[this._editIndex] = oSelectedItem;
           } else {
-            // Push new item
             aLineItems.push({ ...oSelectedItem });
           }
 
-          // Update model
           oPCModel.setProperty("/SelectedItem", oSelectedItem);
           oPCModel.setProperty("/LineItems", aLineItems);
 
-          // Close popup
           this._PCFragment.close();
+        },
+        _validateField: function (oInput, type) {
 
-          MessageToast.show("Profit Center saved successfully!");
+          const sValue = oInput.getValue();
+          const sTarget = oInput.getId() + "/value";
+          let sError = "";
+
+          /* Remove old message for this field */
+          const aMessages = this.oMessageManager.getMessageModel().getData();
+          aMessages.forEach(msg => {
+            if (msg.target === sTarget) {
+              this.oMessageManager.removeMessages(msg);
+            }
+          });
+
+          /* Format validation only (NO mandatory here) */
+
+          switch (type) {
+
+            case "PROFIT_CENTER":
+              if (sValue.length > 10)
+                sError = "Profit Center must be ≤ 10 characters";
+              else if (!/^[A-Z0-9\-\/]*$/.test(sValue))
+                sError = "Only A–Z, 0–9, - and / allowed";
+              break;
+
+            case "CONTROLLING_AREA":
+              if (sValue.length > 4)
+                sError = "Controlling Area must be 4 characters";
+              else if (!/^[A-Z0-9]*$/.test(sValue))
+                sError = "Controlling Area must be alphanumeric";
+              break;
+
+            case "NAME":
+              if (sValue.length > 20)
+                sError = "Name must be ≤ 20 characters";
+              else if (!/^[A-Za-z ]*$/.test(sValue))
+                sError = "Alphabets only allowed";
+              break;
+
+            case "LONG_TEXT":
+              if (sValue.length > 40)
+                sError = "Long Text must be ≤ 40 characters";
+              else if (!/^[A-Za-z ]*$/.test(sValue))
+                sError = "Alphabets only allowed";
+              break;
+
+            case "PERSON_RESP":
+              if (sValue.length > 12)
+                sError = "Person Responsible must be ≤ 12 characters";
+              else if (!/^[A-Z0-9]*$/.test(sValue))
+                sError = "Alphanumeric only";
+              break;
+
+            case "PC_GROUP":
+              if (sValue.length > 12)
+                sError = "Profit Center Group must be ≤ 12 characters";
+              else if (!/^[A-Z0-9]*$/.test(sValue))
+                sError = "Alphanumeric only";
+              break;
+
+            case "SEGMENT":
+              if (sValue.length > 10)
+                sError = "Segment must be ≤ 10 characters";
+              else if (!/^[A-Z0-9]*$/.test(sValue))
+                sError = "Alphanumeric only";
+              break;
+          }
+
+          if (sError) {
+
+            oInput.setValueState("Error");
+            oInput.setValueStateText(sError);
+
+            this.oMessageManager.addMessages(
+              new sap.ui.core.message.Message({
+                message: sError,
+                type: sap.ui.core.MessageType.Error,
+                target: sTarget,
+                processor: this.oControlMessageProcessor
+              })
+            );
+
+          } else {
+
+            oInput.setValueState("None");
+
+          }
+
+        },
+        onLiveValidateProfitCenter: function (oEvent) {
+          this._validateField(oEvent.getSource(), "PROFIT_CENTER");
         },
 
+        onLiveValidateName: function (oEvent) {
+          this._validateField(oEvent.getSource(), "NAME");
+        },
+
+        onLiveValidateLongText: function (oEvent) {
+          this._validateField(oEvent.getSource(), "LONG_TEXT");
+        },
+
+        onLiveValidatePerson: function (oEvent) {
+          this._validateField(oEvent.getSource(), "PERSON_RESP");
+        },
+
+        onLiveValidatePCGroup: function (oEvent) {
+          this._validateField(oEvent.getSource(), "PC_GROUP");
+        },
+
+        onLiveValidateSegment: function (oEvent) {
+          this._validateField(oEvent.getSource(), "SEGMENT");
+        },
 
         validateRowSelection: function () {
           let oTable = this.byId("_IDProfitCenterTable");  // your table ID
@@ -882,16 +1032,16 @@ sap.ui.define(
             });
           });
 
-           // 2️⃣ Company codes assigned in Excel
-  const aAssignedCodes = (row["Company Codes Assigned"] || "")
-    .split(",")
-    .map(c => c.trim());
+          // 2️⃣ Company codes assigned in Excel
+          const aAssignedCodes = (row["Company Codes Assigned"] || "")
+            .split(",")
+            .map(c => c.trim());
 
-  // 3️⃣ Mark assigned = true/false
-  const aCompanyCodeWithFlag = companyCode.map(cc => ({
-    ...cc,
-    Assigned: aAssignedCodes.includes(cc.CompanyCode)
-  }));
+          // 3️⃣ Mark assigned = true/false
+          const aCompanyCodeWithFlag = companyCode.map(cc => ({
+            ...cc,
+            Assigned: aAssignedCodes.includes(cc.CompanyCode)
+          }));
 
           return {
             profitcenter: row["Profit Center "],
